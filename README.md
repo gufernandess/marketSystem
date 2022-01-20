@@ -3,5 +3,3 @@ Projeto final da cadeira de Orientação a Objetos da UFC Quixadá. Um sistema d
 
 ## Relatório do projeto
 https://docs.google.com/document/d/16IvPG3_uiXmiCXjr5OYtkpIPZhhwZ3qUBROUx_hdYxM/edit
-
-## Diagrama UML
