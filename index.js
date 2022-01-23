@@ -1,2 +1,2 @@
-export () => console.log("Está Vivo!!!")
+console.log("Está Vivo!!!")
 
