@@ -8,4 +8,4 @@ O relatório do projeto pode ser acessado
 </a>
 
 ## Diagrama de classe
-Já o diagrama de classe pode ser acessado <a href="https://raw.githubusercontent.com/gufernandess/marketSystem/9d69fe0c20a15efe495e840ca8ceaf0d570da696/assets/UMLImage.svg?token=APB3MD352CYJKCYI5ZYX47LB5S2EC" target="_blank">aqui.</a>
+Já o diagrama de classe pode ser acessado <a href="https://raw.githubusercontent.com/gufernandess/marketSystem/main/assets/Main.png" target="_blank">aqui.</a>
