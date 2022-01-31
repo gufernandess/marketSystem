@@ -4,7 +4,7 @@
  */
 public class Employee extends Person {
 
-    private int counterId = 0;
+    private static int counterId = 0;
     private int id;
     private double wage;
     private Account account;
@@ -12,32 +12,32 @@ public class Employee extends Person {
 
     /**
      * Construtor para a classe Employee, que recebe os dados para
-     * inicializar os campo da classe Employe
+     * inicializar os campo da classe Employee
      * 
      * @param name
      * @param cpf
      * @param contact
      * @param wage
-     * @param isManager
+     * @param typeEmployee
      * 
      * @return void
      */
-    public Employee(String name, String cpf, int contact, double wage,
+    public Employee(String name, String cpf, String contact, double wage,
             TypeEmployee typeEmployee, String username, String email, String password) {
         super(name, cpf, contact); // delegando funcionalidades
         this.wage = wage;
         this.typeEmployee = typeEmployee;
-        this.counterId++;
+        Employee.counterId++;
         this.id = counterId;
         this.account = new Account(username, email, password); // iniciando conta
     }
 
-    /**
-     * Geters e Seters
-     */
-
     public int getId() {
         return id;
+    }
+
+    public TypeEmployee getTypeEmployee() {
+        return typeEmployee;
     }
 
     public double getWage() {
@@ -53,12 +53,17 @@ public class Employee extends Person {
      *         lógica do método setContact da classe pai
      */
     @Override
-    public void setContact(int contact) {
+    public void setContact(String contact) {
         super.setContact(contact);
+    }
+
+    public void setTypeEmployee(TypeEmployee typeEmployee) {
+        this.typeEmployee = typeEmployee;
     }
 
     @Override
     public String toString() {
-        return String.format("[%d, %.2f, %s, %s]", id, wage, account, typeEmployee);
+        return String.format("[%d, %s, %.2f, %s, %s]", id, super.toString(), wage, account, typeEmployee.toString());
     }
+
 }

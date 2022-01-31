@@ -1,14 +1,23 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Report {
 
     private List<Order> ordersList;
-    private Date startDate;
-    private Date finalDate;
-    private double total;
 
-    public Report(Date startDate, Date finalDate, double total) {}
+    public Report(List<Order> list) {
+        ordersList = new ArrayList<Order>();
+        if (list != null)
+            ordersList.addAll(list);
+    }
 
-    private List<Order> filterOrder() {}
+    private double computeTotalValue() {
+    }
 
-    public String toString() {}
-    
+    private List<Order> filterOrder() {
+    }
+
+    public String toString() {
+    }
+
 }

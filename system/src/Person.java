@@ -2,9 +2,9 @@ public abstract class Person {
 
   private String name;
   private String cpf;
-  private int contact;
+  private String contact;
 
-  public Person(String name, String cpf, int contact) {
+  public Person(String name, String cpf, String contact) {
     this.name = name;
     this.cpf = cpf;
     this.contact = contact;
@@ -14,7 +14,7 @@ public abstract class Person {
     return name;
   }
 
-  public int getContact() {
+  public String getContact() {
     return contact;
   }
 
@@ -22,8 +22,13 @@ public abstract class Person {
     return cpf;
   }
 
-  public void setContact(int contact) {
+  public void setContact(String contact) {
     this.contact = contact;
+  }
+
+  @Override
+  public String toString() {
+    return String.format("%s, %s, %s", name, cpf, contact);
   }
 
 }

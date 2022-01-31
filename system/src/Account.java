@@ -15,11 +15,11 @@ public class Account {
   }
 
   public String getEmail() {
-      return email;
+    return email;
   }
 
   public String getPassword() {
-      return password;
+    return password;
   }
 
   public void setUsername(String username) {
@@ -27,11 +27,16 @@ public class Account {
   }
 
   public void setEmail(String email) {
-      this.email = email;
+    this.email = email;
   }
 
   public void setPassword(String password) {
     this.password = password;
+  }
+
+  @Override
+  public String toString() {
+    return String.format("[%s, %s]", username, email);
   }
 
 }

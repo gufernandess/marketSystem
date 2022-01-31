@@ -1,4 +1,4 @@
 public enum TypeEmployee {
-  EMPREGADO_COMUM,
-  GERENTE
+  COMMON_EMPLOYEE,
+  MANAGER
 }

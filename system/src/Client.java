@@ -1,13 +1,10 @@
-public class Client {
+public class Client extends Person {
 
-    private final int counterId = 0;
-    private int id;
-
-    public Client(int id, String name, String cpf, int contact) {}
-
-    public int getId() {
-        return id;
+    public Client(String name, String cpf, String contact) {
+        super(name, cpf, contact);
     }
 
-    public String toString() {}
+    public String toString() {
+        return String.format("[%s, %s, %s]", super.toString());
+    }
 }
