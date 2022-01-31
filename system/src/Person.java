@@ -4,6 +4,12 @@ public abstract class Person {
   private String cpf;
   private int contact;
 
+  public Person(String name, String cpf, int contact) {
+    this.name = name;
+    this.cpf = cpf;
+    this.contact = contact;
+  }
+
   public String getName() {
     return name;
   }
@@ -14,10 +20,6 @@ public abstract class Person {
 
   public String getCpf() {
     return cpf;
-  }
-
-  public void setName(String name) {
-    this.name = name;
   }
 
   public void setContact(int contact) {
