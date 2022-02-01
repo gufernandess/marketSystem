@@ -26,8 +26,8 @@ public class Account {
     return email;
   }
 
-  public String getPassword() {
-    return password;
+  public int getPassword() {
+    return password.hashCode();
   }
 
   public void setUsername(String username) {
@@ -44,6 +44,6 @@ public class Account {
 
   @Override
   public String toString() {
-    return String.format("Nome: %s, Email: %s, Senha(hashcode): %s", username, email, password.hashCode());
+    return String.format("Nome: %s, Email: %s, Senha(hashcode): %d", username, email, password);
   }
 }

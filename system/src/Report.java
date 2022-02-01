@@ -7,12 +7,10 @@ public class Report {
 
     public Report(List<Order> list) {
         ordersList = new ArrayList<Order>();
-        if (list != null)
-            ordersList.addAll(list);
+        if (list != null) ordersList.addAll(list);
     }
 
-    private double computeTotalValue() {
-    }
+    private double computeTotalValue() {}
 
     private List<Order> filterOrder() {
     }

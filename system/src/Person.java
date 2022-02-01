@@ -28,7 +28,7 @@ public abstract class Person {
 
   @Override
   public String toString() {
-    return String.format("%s, %s, %s", name, cpf, contact);
+    return String.format("Nome: %s, CPF: %s, Contato: %s", name, cpf, contact);
   }
 
 }

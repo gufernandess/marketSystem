@@ -14,6 +14,6 @@ public class Item {
 
     @Override
     public String toString() {
-        return String.format("[%s, %d, %.2f]", product.toString(), quantity, getTotalValue());
+        return String.format("%s, Quantidade: %d, Valor total da compra: %.2f", product.toString(), quantity, getTotalValue());
     }
 }

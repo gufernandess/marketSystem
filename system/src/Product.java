@@ -1,22 +1,29 @@
 import java.util.Date;
 
 public class Product {
+  
   private static int counterId = 0;
   private int id;
   private String name;
   private double price;
+  private int quantity;
   private String description;
-  private Date expirationDate;
   private Date manufacturingDate;
+  private Date expirationDate;
 
-  public Product(String name, double price, String description, Date expirationDate, Date manufacturingDate) {
+  public Product(String name, double price, int quantity, String description, Date manufacturingDate, Date expirationDate) {
+    Product.counterId++;
+    this.id = counterId;
     this.name = name;
     this.price = price;
+    this.quantity = quantity;
     this.description = description;
     this.expirationDate = expirationDate;
     this.manufacturingDate = manufacturingDate;
-    Product.counterId++;
-    this.id = counterId;
+  }
+
+  public int getId() {
+      return id;
   }
 
   public String getName() {
@@ -27,8 +34,8 @@ public class Product {
     return price;
   }
 
-  public void setPrice(double price) {
-    this.price = price;
+  public int getQuantity() {
+      return quantity;
   }
 
   public String getDescription() {
@@ -43,10 +50,19 @@ public class Product {
     return manufacturingDate;
   }
 
+
+  public void setPrice(double price) {
+    this.price = price;
+  }
+
+  public void setQuantity(int quantity) {
+      this.quantity = quantity;
+  }
+
   @Override
   public String toString() {
-    return String.format("[%d, %s, %.2f, %s, %s, %s]", id, name, price, description, expirationDate.toString(),
-        manufacturingDate.toString());
+    return String.format("ID: %d, Nome: %s, Preço: %.2f, Descrição: %s, Data de fabricação: %s, Data de validade: %s",
+     id, name, price, description, manufacturingDate.toString(), expirationDate.toString());
   }
 
 }

@@ -59,7 +59,7 @@ public class Employee extends Person {
 
     @Override
     public String toString() {
-        return String.format("[%d, %s, %.2f, %s, %s]", id, super.toString(), wage, account, typeEmployee.toString());
+        return String.format("ID: %d, %s, Salário: %.2f, Conta: %s, Cargo: %s", id, super.toString(), wage, account, typeEmployee.toString());
     }
 
 }

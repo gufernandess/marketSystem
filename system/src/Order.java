@@ -16,28 +16,25 @@ public class Order {
   private Employee employee;
   private Invoice invoice;
 
-  public Order(List<Item> itens, double price, Date date, Employee employee, Client client) {
+  public Order(List<Item> itens, Date date, Employee employee, Client client) {
     if (itens != null) {
       this.itens.addAll(itens);
     }
     Order.counterId++;
     this.id = counterId;
-    this.price = price; /* Esse atributo deveria ser dado pelo método computeBill? */
+    this.price = computeBill();
     this.date = date;
     this.employee = employee;
     this.client = client;
 
-    this.invoice = new Invoice(this.id, itens, price, date, client); /* Instância da nota fiscal */
+    this.invoice = new Invoice(this.id, itens, this.price, date, client); /* Instância da nota fiscal */
   }
 
   public double computeBill() {
-    double sum = 0.00;
+    double total = 0.00;
+    for(Item item : itens) total += item.getTotalValue();
 
-    for(Item item : itens) {
-      sum += item.getTotalValue();
-    }
-
-    return sum;
+    return total;
   }
 
   public boolean addItem(Item item) {}

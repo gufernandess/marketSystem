@@ -119,7 +119,7 @@ public class AccountListing implements Listing {
             accounts.append(accountsList.get(i).getId() + " | ");
             accounts.append(accountsList.get(i).getUsername() + " | ");
             accounts.append(accountsList.get(i).getEmail() + " | ");
-            accounts.append(accountsList.get(i).getPassword().hashCode() + "\n");
+            accounts.append(accountsList.get(i).getPassword() + "\n");
         }
 
         return accounts.toString();
