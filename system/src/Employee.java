@@ -1,10 +1,15 @@
+/**
+ * Classe Employee encapsula os dados básicos que um
+ * empregado deve ter em um mercantil. O mesmo herda
+ * da classe abstrata Person
+ */
 public class Employee extends Person {
 
     private static int counterId = 0;
     private int id;
     private double wage;
     private Account account;
-    private TypeEmployee typeEmployee;
+    private TypeEmployee office;
 
     /**
      * Construtor para a classe Employee, que recebe os dados para
@@ -14,15 +19,15 @@ public class Employee extends Person {
      * @param cpf
      * @param contact
      * @param wage
-     * @param typeEmployee
+     * @param office
      * 
      * @return void
      */
     public Employee(String name, String cpf, String contact, double wage,
-            TypeEmployee typeEmployee, String username, String email, String password) {
+            TypeEmployee office, String username, String email, String password) {
         super(name, cpf, contact); // delegando funcionalidades
         this.wage = wage;
-        this.typeEmployee = typeEmployee;
+        this.office = office;
         Employee.counterId++;
         this.id = counterId;
         this.account = new Account(username, email, password); // iniciando conta
@@ -32,8 +37,8 @@ public class Employee extends Person {
         return id;
     }
 
-    public TypeEmployee getTypeEmployee() {
-        return typeEmployee;
+    public TypeEmployee getOffice() {
+        return office;
     }
 
     public double getWage() {
@@ -53,13 +58,14 @@ public class Employee extends Person {
         super.setContact(contact);
     }
 
-    public void setTypeEmployee(TypeEmployee typeEmployee) {
-        this.typeEmployee = typeEmployee;
+    public void setOffice(TypeEmployee office) {
+        this.office = office;
     }
 
     @Override
     public String toString() {
-        return String.format("ID: %d, %s, Salário: %.2f, Conta: %s, Cargo: %s", id, super.toString(), wage, account, typeEmployee.toString());
+        return String.format("ID: %d, %s, Salário: %.2f, Conta: %s, Cargo: %s", id, super.toString(), wage, account,
+                office);
     }
 
 }

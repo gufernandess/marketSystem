@@ -1,3 +1,7 @@
+/**
+ * Classe Account encapsula os dados básicos de uma conta
+ * em um mercantil
+ */
 public class Account {
 
   private static int counterId = 0;
@@ -15,7 +19,7 @@ public class Account {
   }
 
   public int getId() {
-      return id;
+    return id;
   }
 
   public String getUsername() {

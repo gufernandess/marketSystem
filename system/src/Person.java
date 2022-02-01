@@ -1,3 +1,7 @@
+/**
+ * Classe abstrata Person define atributos e métodos mínimos
+ * que uma classe que implmenta uma Person deve ter
+ */
 public abstract class Person {
 
   private String name;
@@ -9,6 +13,10 @@ public abstract class Person {
     this.cpf = cpf;
     this.contact = contact;
   }
+
+  /**
+   * GETERS/SETERS
+   */
 
   public String getName() {
     return name;

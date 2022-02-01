@@ -7,11 +7,13 @@ public class AccountListing implements Listing {
 
     public AccountListing(List<Account> list) {
         accountsList = new ArrayList<Account>();
-        if(list != null) accountsList.addAll(list);
+        if (list != null)
+            accountsList.addAll(list);
     }
 
     /**
-     * Método privado para verificação da existência de uma eventual conta para cadastro.
+     * Método privado para verificação da existência de uma eventual conta para
+     * cadastro.
      * Usando o email como atributo de comparação (Atributo único para cada conta).
      * 
      * @param email
@@ -39,8 +41,8 @@ public class AccountListing implements Listing {
 
     private Account findAccountById(int id) {
         int idAccount = -1;
-        for(int i = 0; i < accountsList.size(); i++) {
-            if(id == accountsList.get(i).getId()) {
+        for (int i = 0; i < accountsList.size(); i++) {
+            if (id == accountsList.get(i).getId()) {
                 idAccount = i;
             }
         }
@@ -49,7 +51,8 @@ public class AccountListing implements Listing {
     }
 
     /**
-     * Método implementado do Listing, é feito o casting para um objeto do tipo Account.
+     * Método implementado do Listing, é feito o casting para um objeto do tipo
+     * Account.
      * Assim é feito a verificação da existência da conta, e depois o seu cadastro.
      * 
      * @param Object
@@ -58,7 +61,7 @@ public class AccountListing implements Listing {
 
     @Override
     public boolean addObject(Object account) {
-        if(accountAlreadyExists(((Account) account).getEmail())) {
+        if (accountAlreadyExists(((Account) account).getEmail())) {
             System.out.println("Parece que você já tem uma conta cadastrada no nosso sistema, tente logar.\n");
             return false;
         } else {
@@ -69,7 +72,7 @@ public class AccountListing implements Listing {
 
     @Override
     public boolean deleteObject(int idAccount) {
-        if(findAccountById(idAccount) != null) {
+        if (findAccountById(idAccount) != null) {
             accountsList.remove(accountsList.get(idAccount));
             return true;
         } else {
@@ -89,11 +92,17 @@ public class AccountListing implements Listing {
     }
 
     public boolean updateAccountEmail(int idAccount, String newEmail) {
-        if (findAccountById(idAccount) != null && accountAlreadyExists(newEmail) == false) {
-            findAccountById(idAccount).setUsername(newEmail);
-            return true;
+        if (findAccountById(idAccount) != null) {
+
+            if (accountAlreadyExists(newEmail) == false) {
+                findAccountById(idAccount).setUsername(newEmail);
+                return true;
+            } else {
+                System.out.println("Este email já está cadastrado no nosso sistema.\n");
+                return false;
+            }
         } else {
-            System.out.println("Este email já está cadastrado no nosso sistema.\n");
+            System.out.println("Esta conta não foi encontrada no sistema.\n");
             return false;
         }
     }
@@ -103,7 +112,7 @@ public class AccountListing implements Listing {
             findAccountById(idAccount).setPassword(newPassword);
             return true;
         } else {
-            System.out.println("Conta não encontrada.\n");
+            System.out.println("Esta conta não foi encontrada no sistema.\n");
             return false;
         }
     }

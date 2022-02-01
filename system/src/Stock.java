@@ -24,14 +24,14 @@ public class Stock {
 
   private Product findProductById(int id) {
     int idProduct = -1;
-        for(int i = 0; i < productsList.size(); i++) {
-            if(id == productsList.get(i).getId()) {
-                idProduct = i;
-            }
-        }
-
-        return idProduct != -1 ? productsList.get(idProduct) : null;
+    for (int i = 0; i < productsList.size(); i++) {
+      if (id == productsList.get(i).getId()) {
+        idProduct = i;
+      }
     }
+
+    return idProduct != -1 ? productsList.get(idProduct) : null;
+  }
 
   public boolean addProduct(Product product) {
     if (productAlreadyExists(product.getName())) {
@@ -47,19 +47,20 @@ public class Stock {
     if (findProductById(idProduct) != null) {
       productsList.remove(productsList.get(idProduct));
       return true;
-  } else {
+    } else {
       System.out.println("Produto não encontrado.\n");
       return false;
+    }
   }
-}
 
-  // public boolean updateProduct(Product product) {} Atualizar qual atributo especificamente?
+  // public boolean updateProduct(Product product) {} Atualizar qual atributo
+  // especificamente?
 
   public List<Product> search(String pattern) { // Mudei para public
     List<Product> searchResult = new ArrayList<Product>();
 
-    for(int i = 0; i < productsList.size(); i++) {
-      if(productsList.get(i) != null && productsList.get(i).getName().contains(pattern)) {
+    for (int i = 0; i < productsList.size(); i++) {
+      if (productsList.get(i) != null && productsList.get(i).getName().contains(pattern)) {
         searchResult.add(productsList.get(i));
       }
     }
@@ -73,11 +74,11 @@ public class Stock {
     System.out.println("----------PRODUTOS----------");
     System.out.println("\nID | Nome | Preço | Quantidade | Descrição | D. Fabricação | D. Validade\n");
 
-    for(int i = 0; i < productsList.size(); i++) {
-      products.append(productsList.get(i).getId() + " | " + productsList.get(i).getName() + " | " + 
-      productsList.get(i).getPrice() + " | " + productsList.get(i).getQuantity() + " | " + 
-      productsList.get(i).getDescription() + " | " + productsList.get(i).getManufacturingDate() + " | " +
-      productsList.get(i).getExpirationDate() + "\n");
+    for (int i = 0; i < productsList.size(); i++) {
+      products.append(productsList.get(i).getId() + " | " + productsList.get(i).getName() + " | " +
+          productsList.get(i).getPrice() + " | " + productsList.get(i).getQuantity() + " | " +
+          productsList.get(i).getDescription() + " | " + productsList.get(i).getManufacturingDate() + " | " +
+          productsList.get(i).getExpirationDate() + "\n");
     }
 
     return products.toString();

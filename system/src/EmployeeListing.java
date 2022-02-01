@@ -7,12 +7,14 @@ public class EmployeeListing implements Listing {
 
     public EmployeeListing(List<Employee> list) {
         employeesList = new ArrayList<Employee>();
-        if (list != null) employeesList.addAll(list);
+        if (list != null)
+            employeesList.addAll(list);
     }
 
-     /**
+    /**
      * Método privado para verificação da existência de um funcionário na lista.
-     * Usando o CPF como atributo de comparação (Atributo único para cada funcionário).
+     * Usando o CPF como atributo de comparação (Atributo único para cada
+     * funcionário).
      * 
      * @param cpf
      * @return boolean
@@ -39,8 +41,8 @@ public class EmployeeListing implements Listing {
 
     private Employee findEmployeeById(int id) {
         int idEmployee = -1;
-        for(int i = 0; i < employeesList.size(); i++) {
-            if(id == employeesList.get(i).getId()) {
+        for (int i = 0; i < employeesList.size(); i++) {
+            if (id == employeesList.get(i).getId()) {
                 idEmployee = i;
             }
         }
@@ -103,7 +105,7 @@ public class EmployeeListing implements Listing {
             employees.append(employeesList.get(i).getCpf() + " | ");
             employees.append(employeesList.get(i).getContact() + " | ");
             employees.append(employeesList.get(i).getWage() + " | ");
-            employees.append(employeesList.get(i).getTypeEmployee() + "\n");
+            employees.append(employeesList.get(i).getOffice() + "\n");
         }
 
         return employees.toString();
