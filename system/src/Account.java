@@ -1,13 +1,21 @@
 public class Account {
 
+  private static int counterId = 0;
+  private int id;
   private String username;
   private String email;
   private String password;
 
   public Account(String username, String email, String password) {
+    Account.counterId++;
+    this.id = counterId;
     this.username = username;
     this.email = email;
     this.password = password;
+  }
+
+  public int getId() {
+      return id;
   }
 
   public String getUsername() {
@@ -36,7 +44,6 @@ public class Account {
 
   @Override
   public String toString() {
-    return String.format("[%s, %s]", username, email);
+    return String.format("Nome: %s, Email: %s, Senha(hashcode): %s", username, email, password.hashCode());
   }
-
 }

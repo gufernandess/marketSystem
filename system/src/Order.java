@@ -2,6 +2,10 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * Representação de uma compra feita por um cliente.
+ */
+
 public class Order {
   private static int counterId = 0;
   private int id;
@@ -10,27 +14,36 @@ public class Order {
   private Date date;
   private Client client;
   private Employee employee;
+  private Invoice invoice;
 
   public Order(List<Item> itens, double price, Date date, Employee employee, Client client) {
     if (itens != null) {
       this.itens.addAll(itens);
     }
-    this.price = price;
+    Order.counterId++;
+    this.id = counterId;
+    this.price = price; /* Esse atributo deveria ser dado pelo método computeBill? */
     this.date = date;
     this.employee = employee;
     this.client = client;
-    Order.counterId++;
-    this.id = counterId;
+
+    this.invoice = new Invoice(this.id, itens, price, date, client); /* Instância da nota fiscal */
   }
 
   public double computeBill() {
-    double sum = 0.0;
+    double sum = 0.00;
 
-    for (Item item : itens) {
+    for(Item item : itens) {
       sum += item.getTotalValue();
     }
 
     return sum;
   }
+
+  public boolean addItem(Item item) {}
+
+  public boolean removeItem(int idItem) {}
+
+  public String toString() {}
 
 }

@@ -1,7 +1,3 @@
-/**
- * A classe Employee, que encapsula os dados básicos de um empegado
- * de um mercantil. Esta classe herda da classe Person
- */
 public class Employee extends Person {
 
     private static int counterId = 0;

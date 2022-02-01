@@ -6,10 +6,17 @@ public class EmployeeListing implements Listing {
     private List<Employee> employeesList;
 
     public EmployeeListing(List<Employee> list) {
-        employeesList = new ArrayList<Employee>(50);
-        if (list != null)
-            employeesList.addAll(list);
+        employeesList = new ArrayList<Employee>();
+        if (list != null) employeesList.addAll(list);
     }
+
+     /**
+     * Método privado para verificação da existência de um funcionário na lista.
+     * Usando o CPF como atributo de comparação (Atributo único para cada funcionário).
+     * 
+     * @param cpf
+     * @return boolean
+     */
 
     private boolean employeeAlreadyExists(String cpf) {
         boolean employeeAlreadyExists = false;
@@ -20,6 +27,25 @@ public class EmployeeListing implements Listing {
         }
 
         return employeeAlreadyExists;
+    }
+
+    /**
+     * Método privado para achar funcionário baseado no seu id.
+     * Usado para modificações no registro (Deletar/Atualizar).
+     * 
+     * @param id
+     * @return Employee
+     */
+
+    private Employee findEmployeeById(int id) {
+        int idEmployee = -1;
+        for(int i = 0; i < employeesList.size(); i++) {
+            if(id == employeesList.get(i).getId()) {
+                idEmployee = i;
+            }
+        }
+
+        return idEmployee != -1 ? employeesList.get(idEmployee) : null;
     }
 
     @Override
@@ -34,9 +60,9 @@ public class EmployeeListing implements Listing {
     }
 
     @Override
-    public boolean deleteObject(Object employee) {
-        if (employeeAlreadyExists(((Employee) employee).getCpf())) {
-            employeesList.remove(((Employee) employee));
+    public boolean deleteObject(int idEmployee) {
+        if (findEmployeeById(idEmployee) != null) {
+            employeesList.remove(employeesList.get(idEmployee));
             return true;
         } else {
             System.out.println("Funcionário não encontrado.\n");
@@ -44,9 +70,9 @@ public class EmployeeListing implements Listing {
         }
     }
 
-    public boolean updateEmployeeWage(Employee employee, double newWage) {
-        if (employeeAlreadyExists(employee.getCpf())) {
-            employee.setWage(newWage);
+    public boolean updateEmployeeWage(int idEmployee, double newWage) {
+        if (findEmployeeById(idEmployee) != null) {
+            findEmployeeById(idEmployee).setWage(newWage);
             return true;
         } else {
             System.out.println("Conta não encontrada.\n");
@@ -54,9 +80,9 @@ public class EmployeeListing implements Listing {
         }
     }
 
-    public boolean updateEmployeeContact(Employee employee, String newContact) {
-        if (employeeAlreadyExists(employee.getCpf())) {
-            employee.setContact(newContact);
+    public boolean updateEmployeeContact(int idEmployee, String newContact) {
+        if (findEmployeeById(idEmployee) != null) {
+            findEmployeeById(idEmployee).setContact(newContact);
             return true;
         } else {
             System.out.println("Conta não encontrada.\n");
@@ -72,11 +98,11 @@ public class EmployeeListing implements Listing {
         System.out.println("\nID | Nome | CPF | Contato | Salário | Cargo");
 
         for (int i = 0; i < employeesList.size(); i++) {
-            employees.append(i + " | ");
+            employees.append(employeesList.get(i).getId() + " | ");
             employees.append(employeesList.get(i).getName() + " | ");
             employees.append(employeesList.get(i).getCpf() + " | ");
             employees.append(employeesList.get(i).getContact() + " | ");
-            employees.append(employeesList.get(i).getWage() + "\n");
+            employees.append(employeesList.get(i).getWage() + " | ");
             employees.append(employeesList.get(i).getTypeEmployee() + "\n");
         }
 
