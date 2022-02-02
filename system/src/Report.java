@@ -12,10 +12,8 @@ public class Report {
 
     private double computeTotalValue() {}
 
-    private List<Order> filterOrder() {
-    }
+    private List<Order> filterOrder() {}
 
-    public String toString() {
-    }
+    public String toString() {}
 
 }

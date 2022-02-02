@@ -1,6 +1,6 @@
 /**
  * Classe abstrata Person define atributos e métodos mínimos
- * que uma classe que implmenta uma Person deve ter
+ * que uma classe que implementa uma Person deve ter
  */
 public abstract class Person {
 
@@ -15,7 +15,7 @@ public abstract class Person {
   }
 
   /**
-   * GETERS/SETERS
+   * Getters/Setters
    */
 
   public String getName() {

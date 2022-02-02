@@ -1,4 +1,5 @@
 import java.util.List;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -16,25 +17,38 @@ public class Order {
   private Client client;
   private Employee employee;
 
-  public Order(List<Item> itens, Date date, Employee employee, Client client) {
-    this.itens = new ArrayList<>();
+  /**
+   * O objeto SimpleDateFormat serve para formatação de datas, nesse caso
+   * para o modelo comumente usado no Brasil(dd/mm/yyyy).
+   * 
+   * Pelo fato de a formatação gerar uma string, a mesma só é utilizada
+   * para mostrar a data externamente.
+   */
 
-    if (itens != null)
-      this.itens.addAll(itens);
+  SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
 
+  public Order(List<Item> itens, Employee employee, Client client) {
     Order.counterId++;
     this.id = counterId;
+    this.itens = new ArrayList<Item>();
+    if (itens != null) this.itens.addAll(itens);
     this.price = computeBill();
-    this.date = date;
+    this.date = new Date(System.currentTimeMillis());
     this.employee = employee;
     this.client = client;
-
   }
+
+  /**
+   * Computando valor total do pedido
+   * 
+   * @return double
+   * 
+   */
 
   public double computeBill() {
     double total = 0.00;
-    for (Item item : itens)
-      total += item.getTotalValue();
+
+    for (Item item : itens) total += item.getTotalValue();
 
     return total;
   }
@@ -86,15 +100,15 @@ public class Order {
 
   public Invoice finalizeOrder() {
     System.out.println("Compra finalizada.\n");
-    // Aqui possivelmente vai ter a lógica de adiconar
-    // o pedido em relatorio
+    // Aqui possivelmente vai ter a lógica de adicionar o pedido em relatório
 
     return new Invoice(this.id, this.itens, this.price, this.date, this.client); /* Instância da nota fiscal */
   }
 
   @Override
   public String toString() {
-    return String.format("Id: %d, Preço: %.2f, Data: %s, Client: %s, Empregado: %s", id, price, date, client, employee);
+    return String.format("Id: %d, Preço: %.2f, Data: %s, Client: %s, Empregado: %s", id, price, 
+    formatDate.format(date), client, employee);
   }
 
 }

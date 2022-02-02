@@ -1,3 +1,4 @@
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -15,9 +16,11 @@ public class Invoice {
     private Date date;
     private Client client;
 
+    SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
+
     public Invoice(int id, List<Item> itens, double price, Date date, Client client) {
-        itens = new ArrayList<Item>();
         this.id = id;
+        itens = new ArrayList<Item>();
         this.itens.addAll(itens);
         this.price = price;
         this.date = date;
@@ -25,6 +28,17 @@ public class Invoice {
     }
 
     public String toString() {
+        StringBuilder invoice = new StringBuilder();
 
+        System.out.println("----------NOTA FISCAL----------");
+        System.out.println("\nID | Itens | Preço | Data | Cliente\n");
+
+        invoice.append(this.id + " | ");
+        invoice.append(this.itens + " | ");
+        invoice.append(this.price + " | ");
+        invoice.append(formatDate.format(this.date) + " | ");
+        invoice.append(this.client + "\n");
+
+        return invoice.toString();
     }
 }

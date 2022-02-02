@@ -7,8 +7,7 @@ public class EmployeeListing implements Listing {
 
     public EmployeeListing(List<Employee> list) {
         employeesList = new ArrayList<Employee>();
-        if (list != null)
-            employeesList.addAll(list);
+        if (list != null) employeesList.addAll(list);
     }
 
     /**
@@ -39,7 +38,7 @@ public class EmployeeListing implements Listing {
      * @return Employee
      */
 
-    private Employee findEmployeeById(int id) {
+    /*private Employee findEmployeeById(int id) {
         int idEmployee = -1;
         for (int i = 0; i < employeesList.size(); i++) {
             if (id == employeesList.get(i).getId()) {
@@ -48,7 +47,7 @@ public class EmployeeListing implements Listing {
         }
 
         return idEmployee != -1 ? employeesList.get(idEmployee) : null;
-    }
+    }*/
 
     @Override
     public boolean addObject(Object employee) {
@@ -63,7 +62,7 @@ public class EmployeeListing implements Listing {
 
     @Override
     public boolean deleteObject(int idEmployee) {
-        if (findEmployeeById(idEmployee) != null) {
+        if (employeesList.get(idEmployee) != null) {
             employeesList.remove(employeesList.get(idEmployee));
             return true;
         } else {
@@ -73,21 +72,26 @@ public class EmployeeListing implements Listing {
     }
 
     public boolean updateEmployeeWage(int idEmployee, double newWage) {
-        if (findEmployeeById(idEmployee) != null) {
-            findEmployeeById(idEmployee).setWage(newWage);
+        if (employeesList.get(idEmployee) != null) {
+            employeesList.get(idEmployee).setWage(newWage);
             return true;
         } else {
-            System.out.println("Conta não encontrada.\n");
+            System.out.println("Este funcionário não foi encontrado no sistema.\n");
             return false;
         }
     }
 
     public boolean updateEmployeeContact(int idEmployee, String newContact) {
-        if (findEmployeeById(idEmployee) != null) {
-            findEmployeeById(idEmployee).setContact(newContact);
-            return true;
+        if (employeesList.get(idEmployee) != null) {
+            if (employeeAlreadyExists(newContact) == false) {
+                employeesList.get(idEmployee).setContact(newContact);
+                return true;
+            } else {
+                System.out.println("Este contato já está cadastrado no nosso sistema.\n");
+                return false;
+            }
         } else {
-            System.out.println("Conta não encontrada.\n");
+            System.out.println("Este funcionário não foi encontrado no sistema.\n");
             return false;
         }
     }

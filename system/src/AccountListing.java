@@ -39,7 +39,7 @@ public class AccountListing implements Listing {
      * @return Account
      */
 
-    private Account findAccountById(int id) {
+    /*private Account findAccountById(int id) {
         int idAccount = -1;
         for (int i = 0; i < accountsList.size(); i++) {
             if (id == accountsList.get(i).getId()) {
@@ -48,7 +48,7 @@ public class AccountListing implements Listing {
         }
 
         return idAccount != -1 ? accountsList.get(idAccount) : null;
-    }
+    }*/
 
     /**
      * Método implementado do Listing, é feito o casting para um objeto do tipo
@@ -72,30 +72,29 @@ public class AccountListing implements Listing {
 
     @Override
     public boolean deleteObject(int idAccount) {
-        if (findAccountById(idAccount) != null) {
+        if (accountsList.get(idAccount) != null) {
             accountsList.remove(accountsList.get(idAccount));
             return true;
         } else {
-            System.out.println("Conta não encontrada.\n");
+            System.out.println("Esta conta não foi encontrada no sistema.\n");
             return false;
         }
     }
 
     public boolean updateAccountName(int idAccount, String newName) {
-        if (findAccountById(idAccount) != null) {
-            findAccountById(idAccount).setUsername(newName);
+        if (accountsList.get(idAccount) != null) {
+            accountsList.get(idAccount).setUsername(newName);
             return true;
         } else {
-            System.out.println("Conta não encontrada.\n");
+            System.out.println("Esta conta não foi encontrada no sistema.\n");
             return false;
         }
     }
 
     public boolean updateAccountEmail(int idAccount, String newEmail) {
-        if (findAccountById(idAccount) != null) {
-
+        if (accountsList.get(idAccount) != null) {
             if (accountAlreadyExists(newEmail) == false) {
-                findAccountById(idAccount).setUsername(newEmail);
+                accountsList.get(idAccount).setUsername(newEmail);
                 return true;
             } else {
                 System.out.println("Este email já está cadastrado no nosso sistema.\n");
@@ -108,8 +107,8 @@ public class AccountListing implements Listing {
     }
 
     public boolean updateAccountPassword(int idAccount, String newPassword) {
-        if (findAccountById(idAccount) != null) {
-            findAccountById(idAccount).setPassword(newPassword);
+        if (accountsList.get(idAccount) != null) {
+            accountsList.get(idAccount).setPassword(newPassword);
             return true;
         } else {
             System.out.println("Esta conta não foi encontrada no sistema.\n");

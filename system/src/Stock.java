@@ -1,14 +1,21 @@
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Dentro da classe Stock(Estoque) são armazenados todos os produtos disponíveis.
+ * Todos os produtos retirados para venda são retirados daqui.
+ * 
+ * @param productsList
+ * 
+ */
+
 public class Stock {
 
   private List<Product> productsList;
 
   public Stock(List<Product> list) {
     productsList = new ArrayList<Product>();
-    if (list != null)
-      productsList.addAll(list);
+    if (list != null) productsList.addAll(list);
   }
 
   private boolean productAlreadyExists(String name) {
@@ -22,7 +29,7 @@ public class Stock {
     return productAlreadyExists;
   }
 
-  private Product findProductById(int id) {
+  /*private Product findProductById(int id) {
     int idProduct = -1;
     for (int i = 0; i < productsList.size(); i++) {
       if (id == productsList.get(i).getId()) {
@@ -31,7 +38,7 @@ public class Stock {
     }
 
     return idProduct != -1 ? productsList.get(idProduct) : null;
-  }
+  }*/
 
   public boolean addProduct(Product product) {
     if (productAlreadyExists(product.getName())) {
@@ -44,7 +51,7 @@ public class Stock {
   }
 
   public boolean deleteProduct(int idProduct) {
-    if (findProductById(idProduct) != null) {
+    if (productsList.get(idProduct) != null) {
       productsList.remove(productsList.get(idProduct));
       return true;
     } else {
@@ -56,7 +63,14 @@ public class Stock {
   // public boolean updateProduct(Product product) {} Atualizar qual atributo
   // especificamente?
 
-  public List<Product> search(String pattern) { // Mudei para public
+  /**
+   * Método de pesquisa de produtos que gera uma nova lista baseada no pattern passado como parâmetro.
+   * 
+   * @param pattern
+   * @return
+   */
+
+  public List<Product> search(String pattern) {
     List<Product> searchResult = new ArrayList<Product>();
 
     for (int i = 0; i < productsList.size(); i++) {

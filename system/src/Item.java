@@ -1,3 +1,6 @@
+/**
+ * Um item(conjunto) é representando por um produto(unidade) e uma quantidade de produtos
+ */
 public class Item {
 
     private Product product;
@@ -7,6 +10,13 @@ public class Item {
         this.product = product;
         this.quantity = quantity;
     }
+
+    /**
+     * Este método retorna o valor total do conjunto item.
+     * 
+     * @return double
+     * 
+     */
 
     public double getTotalValue() {
         return product.getPrice() * quantity;
@@ -18,6 +28,10 @@ public class Item {
 
     public int getQuantity() {
         return this.quantity;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     public void setQuantity(int quantity) {
