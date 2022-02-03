@@ -1,4 +1,9 @@
-import java.util.Date;
+// import java.util.Date;
+
+/**
+ * Esta classe representa os produtos que serão adicionados ao estoque
+ * e vendidos aos clientes.
+ */
 
 public class Product {
   
@@ -7,19 +12,19 @@ public class Product {
   private String name;
   private double price;
   private int quantity;
-  private String description;
+  /*private String description;
   private Date manufacturingDate;
-  private Date expirationDate;
+  private Date expirationDate;*/
 
-  public Product(String name, double price, int quantity, String description, Date manufacturingDate, Date expirationDate) {
+  public Product(String name, double price, int quantity/*, String description, Date manufacturingDate, Date expirationDate*/) {
     Product.counterId++;
     this.id = counterId;
     this.name = name;
     this.price = price;
     this.quantity = quantity;
-    this.description = description;
+    /*this.description = description;
     this.expirationDate = expirationDate;
-    this.manufacturingDate = manufacturingDate;
+    this.manufacturingDate = manufacturingDate;*/
   }
 
   public int getId() {
@@ -38,7 +43,7 @@ public class Product {
       return quantity;
   }
 
-  public String getDescription() {
+  /*public String getDescription() {
     return description;
   }
 
@@ -48,8 +53,11 @@ public class Product {
 
   public Date getManufacturingDate() {
     return manufacturingDate;
-  }
+  }*/
 
+  public void setName(String name) {
+      this.name = name;
+  }
 
   public void setPrice(double price) {
     this.price = price;
@@ -61,8 +69,8 @@ public class Product {
 
   @Override
   public String toString() {
-    return String.format("ID: %d, Nome: %s, Preço: %.2f, Descrição: %s, Data de fabricação: %s, Data de validade: %s",
-     id, name, price, description, manufacturingDate.toString(), expirationDate.toString());
+    return String.format("\n\nID: %d, Nome: %s, Preço: %.2f, Descrição: %s, Data de fabricação: %s, Data de validade: %s\n\n",
+     id, name, price/*, description, manufacturingDate.toString(), expirationDate.toString()*/);
   }
 
 }

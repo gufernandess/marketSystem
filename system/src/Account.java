@@ -31,6 +31,12 @@ public class Account {
     return email;
   }
 
+  /**
+   * A senha é acessada com criptografia hash por segurança.
+   * 
+   * @return int
+   */
+
   public int getPassword() {
     return password.hashCode();
   }
@@ -49,6 +55,6 @@ public class Account {
 
   @Override
   public String toString() {
-    return String.format("Nome: %s, Email: %s, Senha(hashcode): %d", username, email, password);
+    return String.format("\n\nNome: %s, Email: %s, Senha(hashcode): %d\n\n", username, email, password);
   }
 }

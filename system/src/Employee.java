@@ -25,13 +25,13 @@ public class Employee extends Person {
      */
     
     public Employee(String name, String cpf, String contact, double wage,
-            TypeEmployee office, String username, String email, String password) {
+            TypeEmployee office/*, String username, String email, String password*/) {
         super(name, cpf, contact); // delegando funcionalidades
         Employee.counterId++;
         this.id = counterId;
         this.wage = wage;
         this.office = office;
-        this.account = new Account(username, email, password); // inicializando conta
+        //this.account = new Account(username, email, password); // inicializando conta
     }
 
     public int getId() {
@@ -65,7 +65,7 @@ public class Employee extends Person {
 
     @Override
     public String toString() {
-        return String.format("ID: %d, %s, Salário: %.2f, Conta: %s, Cargo: %s", id, super.toString(), wage,
+        return String.format("\n\nID: %d, %s, Salário: %.2f, Conta: %s, Cargo: %s\n\n", id, super.toString(), wage,
          account, office);
     }
 

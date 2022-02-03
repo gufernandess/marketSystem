@@ -13,9 +13,9 @@ public class Stock {
 
   private List<Product> productsList;
 
-  public Stock(List<Product> list) {
+  public Stock(/*List<Product> list*/) {
     productsList = new ArrayList<Product>();
-    if (list != null) productsList.addAll(list);
+    //if (list != null) productsList.addAll(list);
   }
 
   private boolean productAlreadyExists(String name) {
@@ -29,23 +29,17 @@ public class Stock {
     return productAlreadyExists;
   }
 
-  /*private Product findProductById(int id) {
-    int idProduct = -1;
-    for (int i = 0; i < productsList.size(); i++) {
-      if (id == productsList.get(i).getId()) {
-        idProduct = i;
-      }
-    }
-
-    return idProduct != -1 ? productsList.get(idProduct) : null;
-  }*/
+  public List<Product> getProductsList() {
+      return productsList;
+  }
 
   public boolean addProduct(Product product) {
     if (productAlreadyExists(product.getName())) {
-      System.out.println("Parece que este produto já está cadastrado no sistema.\n");
+      System.out.println("\nParece que este produto já está cadastrado no sistema.\n");
       return false;
     } else {
       productsList.add(product);
+      System.out.println("\nO produto foi adicionado com sucesso.\n");
       return true;
     }
   }
@@ -53,15 +47,57 @@ public class Stock {
   public boolean deleteProduct(int idProduct) {
     if (productsList.get(idProduct) != null) {
       productsList.remove(productsList.get(idProduct));
+      System.out.println("\nO produto foi removido com sucesso.\n");
       return true;
     } else {
-      System.out.println("Produto não encontrado.\n");
+      System.out.println("\nProduto não encontrado.\n");
       return false;
     }
   }
 
-  // public boolean updateProduct(Product product) {} Atualizar qual atributo
-  // especificamente?
+  public boolean updateProductName(int idProduct, String newName) {
+    if (productsList.get(idProduct) != null) {
+      if (productAlreadyExists(newName) == false) {
+          productsList.get(idProduct).setName(newName);
+          System.out.println("\nO nome do produto foi atualizado com sucesso.\n");
+          return true;
+      } else {
+          System.out.println("\nEste produto já está cadastrado no nosso sistema.\n");
+          return false;
+      }
+  } else {
+      System.out.println("\nEste produto não foi encontrada no sistema.\n");
+      return false;
+  }
+} 
+
+  public boolean updateProductPrice(int idProduct, double newPrice) {
+    if(productsList.get(idProduct) != null) {
+      productsList.get(idProduct).setPrice(newPrice);
+      System.out.println("\nO preço do produto foi atualizado com sucesso.\n");
+      return true;
+  } else {
+      System.out.println("\nEste produto não foi encontrado no sistema.\n");
+      return false;
+  }
+} 
+
+  public boolean updateProductQuantity(int idProduct, int newQuantity) {
+    if(newQuantity <= 0) {
+      System.out.println("\nInsira uma quantidade válida.\n");
+      return false;
+    }
+    if(productsList.get(idProduct) != null) {
+      productsList.get(idProduct).setQuantity(productsList.get(idProduct)
+      .getQuantity() + newQuantity);
+      System.out.println("\nA quantidade do produto disponível foi atualizada.\n");
+      return true;
+  } 
+    else {
+      System.out.println("\nEste produto não foi encontrado no sistema.\n");
+      return false;
+  }
+} 
 
   /**
    * Método de pesquisa de produtos que gera uma nova lista baseada no pattern passado como parâmetro.
@@ -85,14 +121,14 @@ public class Stock {
   public String toString() {
     StringBuilder products = new StringBuilder();
 
-    System.out.println("----------PRODUTOS----------");
+    System.out.println("\n----------PRODUTOS----------");
     System.out.println("\nID | Nome | Preço | Quantidade | Descrição | D. Fabricação | D. Validade\n");
 
     for (int i = 0; i < productsList.size(); i++) {
       products.append(productsList.get(i).getId() + " | " + productsList.get(i).getName() + " | " +
-          productsList.get(i).getPrice() + " | " + productsList.get(i).getQuantity() + " | " +
+          productsList.get(i).getPrice() + " | " + productsList.get(i).getQuantity() + " | "/* +
           productsList.get(i).getDescription() + " | " + productsList.get(i).getManufacturingDate() + " | " +
-          productsList.get(i).getExpirationDate() + "\n");
+          productsList.get(i).getExpirationDate() + "\n"*/);
     }
 
     return products.toString();

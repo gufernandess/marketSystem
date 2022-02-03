@@ -1,5 +1,6 @@
 /**
- * Um item(conjunto) é representando por um produto(unidade) e uma quantidade de produtos
+ * Um item(conjunto) é representando por um produto(unidade) e um atributo que
+ * denomina a quantidade de produtos.
  */
 public class Item {
 
@@ -40,7 +41,8 @@ public class Item {
 
     @Override
     public String toString() {
-        return String.format("%s, Quantidade: %d, Valor total da compra: %.2f", product.toString(), quantity,
-                getTotalValue());
+        return String.format("\n\n%s, Quantidade: %d, Valor total da compra: %.2f\n\n", product.toString(),
+        quantity,
+        getTotalValue());
     }
 }

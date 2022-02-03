@@ -5,6 +5,6 @@ public class Client extends Person {
     }
 
     public String toString() {
-        return String.format("Nome: %s, CPF: %s, Contato: %s", super.toString());
+        return String.format("\n\nNome: %s, CPF: %s, Contato: %s\n\n", super.toString());
     }
 }

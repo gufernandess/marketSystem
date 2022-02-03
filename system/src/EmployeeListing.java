@@ -1,13 +1,12 @@
 import java.util.ArrayList;
 import java.util.List;
-
 public class EmployeeListing implements Listing {
 
     private List<Employee> employeesList;
 
-    public EmployeeListing(List<Employee> list) {
+    public EmployeeListing(/*List<Employee> list*/) {
         employeesList = new ArrayList<Employee>();
-        if (list != null) employeesList.addAll(list);
+        //if (list != null) employeesList.addAll(list);
     }
 
     /**
@@ -30,32 +29,14 @@ public class EmployeeListing implements Listing {
         return employeeAlreadyExists;
     }
 
-    /**
-     * Método privado para achar funcionário baseado no seu id.
-     * Usado para modificações no registro (Deletar/Atualizar).
-     * 
-     * @param id
-     * @return Employee
-     */
-
-    /*private Employee findEmployeeById(int id) {
-        int idEmployee = -1;
-        for (int i = 0; i < employeesList.size(); i++) {
-            if (id == employeesList.get(i).getId()) {
-                idEmployee = i;
-            }
-        }
-
-        return idEmployee != -1 ? employeesList.get(idEmployee) : null;
-    }*/
-
     @Override
     public boolean addObject(Object employee) {
         if (employeeAlreadyExists(((Employee) employee).getCpf())) {
-            System.out.println("Parece que este funcionário já está cadastrado no sistema.\n");
+            System.out.println("\nParece que este funcionário já está cadastrado no sistema.\n");
             return false;
         } else {
             employeesList.add(((Employee) employee));
+            System.out.println("\nFuncionário cadastrado!\n");
             return true;
         }
     }
@@ -64,9 +45,10 @@ public class EmployeeListing implements Listing {
     public boolean deleteObject(int idEmployee) {
         if (employeesList.get(idEmployee) != null) {
             employeesList.remove(employeesList.get(idEmployee));
+            System.out.println("\nFuncionário deletado!\n");
             return true;
         } else {
-            System.out.println("Funcionário não encontrado.\n");
+            System.out.println("\nFuncionário não encontrado.\n");
             return false;
         }
     }
@@ -74,9 +56,10 @@ public class EmployeeListing implements Listing {
     public boolean updateEmployeeWage(int idEmployee, double newWage) {
         if (employeesList.get(idEmployee) != null) {
             employeesList.get(idEmployee).setWage(newWage);
+            System.out.println("\nSalário atualizado!\n");
             return true;
         } else {
-            System.out.println("Este funcionário não foi encontrado no sistema.\n");
+            System.out.println("\nEste funcionário não foi encontrado no sistema.\n");
             return false;
         }
     }
@@ -85,14 +68,28 @@ public class EmployeeListing implements Listing {
         if (employeesList.get(idEmployee) != null) {
             if (employeeAlreadyExists(newContact) == false) {
                 employeesList.get(idEmployee).setContact(newContact);
+                System.out.println("\nContato atualizado!\n");
                 return true;
             } else {
-                System.out.println("Este contato já está cadastrado no nosso sistema.\n");
+                System.out.println("\nEste contato já está cadastrado no nosso sistema.\n");
                 return false;
             }
         } else {
-            System.out.println("Este funcionário não foi encontrado no sistema.\n");
+            System.out.println("\nEste funcionário não foi encontrado no sistema.\n");
             return false;
+        }
+    }
+
+    public boolean updateEmployeeOffice(int idEmployee) {
+        if(employeesList.get(idEmployee).getOffice() == TypeEmployee.COMMON_EMPLOYEE) {
+            employeesList.get(idEmployee).setOffice(TypeEmployee.MANAGER);
+            System.out.println("\nCargo atualizado!\n");
+            return true;
+        }
+        else {
+            employeesList.get(idEmployee).setOffice(TypeEmployee.COMMON_EMPLOYEE);
+            System.out.println("\nCargo atualizado!\n");
+            return true;
         }
     }
 
@@ -100,8 +97,8 @@ public class EmployeeListing implements Listing {
     public String toString() {
         StringBuilder employees = new StringBuilder();
 
-        System.out.println("----------FUNCIONÁRIOS----------");
-        System.out.println("\nID | Nome | CPF | Contato | Salário | Cargo");
+        System.out.println("\n----------FUNCIONÁRIOS----------");
+        System.out.println("\nID | Nome | CPF | Contato | Salário | Cargo\n");
 
         for (int i = 0; i < employeesList.size(); i++) {
             employees.append(employeesList.get(i).getId() + " | ");

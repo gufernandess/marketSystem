@@ -36,7 +36,7 @@ public abstract class Person {
 
   @Override
   public String toString() {
-    return String.format("Nome: %s, CPF: %s, Contato: %s", name, cpf, contact);
+    return String.format("\n\nNome: %s, CPF: %s, Contato: %s\n\n", name, cpf, contact);
   }
 
 }

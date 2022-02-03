@@ -5,10 +5,9 @@ public class AccountListing implements Listing {
 
     private List<Account> accountsList;
 
-    public AccountListing(List<Account> list) {
+    public AccountListing(/*List<Account> list*/) {
         accountsList = new ArrayList<Account>();
-        if (list != null)
-            accountsList.addAll(list);
+        //if (list != null) accountsList.addAll(list);
     }
 
     /**
@@ -20,35 +19,40 @@ public class AccountListing implements Listing {
      * @return boolean
      */
 
-    private boolean accountAlreadyExists(String email) {
-        boolean accountAlreadyExists = false;
+    private boolean verifyEmail(String email) {
+        boolean verifyEmail = false;
         for (int i = 0; i < accountsList.size(); i++) {
             if (email.equals(accountsList.get(i).getEmail())) {
-                accountAlreadyExists = true;
+                verifyEmail = true;
             }
         }
 
-        return accountAlreadyExists;
+        return verifyEmail;
     }
 
     /**
-     * Método privado para achar conta baseado no seu id.
-     * Usado para modificações na conta (Deletar/Atualizar).
+     * Esse método público é bastante semelhante ao método anterior,
+     * mas ao invés de verificar a existência de uma conta, ela também
+     * verifica a autenticidade dos dados do usuário na classe Menu para
+     * que o usuário consiga logar no sistema.
      * 
-     * @param id
-     * @return Account
+     * @param email
+     * @param password
+     * @return boolean
+     * 
      */
 
-    /*private Account findAccountById(int id) {
-        int idAccount = -1;
+    public boolean thisAccountExists(String email, String password) {
+        boolean thisAccountExists = false;
         for (int i = 0; i < accountsList.size(); i++) {
-            if (id == accountsList.get(i).getId()) {
-                idAccount = i;
+            if (email.equals(accountsList.get(i).getEmail()) && 
+            password.hashCode() == accountsList.get(i).getPassword()) {
+                thisAccountExists = true;
             }
         }
 
-        return idAccount != -1 ? accountsList.get(idAccount) : null;
-    }*/
+        return thisAccountExists;
+    }
 
     /**
      * Método implementado do Listing, é feito o casting para um objeto do tipo
@@ -61,11 +65,12 @@ public class AccountListing implements Listing {
 
     @Override
     public boolean addObject(Object account) {
-        if (accountAlreadyExists(((Account) account).getEmail())) {
-            System.out.println("Parece que você já tem uma conta cadastrada no nosso sistema, tente logar.\n");
+        if (verifyEmail(((Account) account).getEmail())) {
+            System.out.println("\nParece que você já tem uma conta cadastrada no nosso sistema, tente logar.\n");
             return false;
         } else {
             accountsList.add(((Account) account));
+            System.out.println("\nConta cadastrada com sucesso!\n");
             return true;
         }
     }
@@ -74,9 +79,10 @@ public class AccountListing implements Listing {
     public boolean deleteObject(int idAccount) {
         if (accountsList.get(idAccount) != null) {
             accountsList.remove(accountsList.get(idAccount));
+            System.out.println("\nConta deletada com sucesso!\n");
             return true;
         } else {
-            System.out.println("Esta conta não foi encontrada no sistema.\n");
+            System.out.println("\nEsta conta não foi encontrada no sistema.\n");
             return false;
         }
     }
@@ -84,24 +90,26 @@ public class AccountListing implements Listing {
     public boolean updateAccountName(int idAccount, String newName) {
         if (accountsList.get(idAccount) != null) {
             accountsList.get(idAccount).setUsername(newName);
+            System.out.println("\nNome de usuário atualizado!\n");
             return true;
         } else {
-            System.out.println("Esta conta não foi encontrada no sistema.\n");
+            System.out.println("\nEsta conta não foi encontrada no sistema.\n");
             return false;
         }
     }
 
     public boolean updateAccountEmail(int idAccount, String newEmail) {
         if (accountsList.get(idAccount) != null) {
-            if (accountAlreadyExists(newEmail) == false) {
+            if (verifyEmail(newEmail) == false) {
                 accountsList.get(idAccount).setUsername(newEmail);
+                System.out.println("\nE-mail atualizado!\n");
                 return true;
             } else {
-                System.out.println("Este email já está cadastrado no nosso sistema.\n");
+                System.out.println("\nEste email já está cadastrado no nosso sistema.\n");
                 return false;
             }
         } else {
-            System.out.println("Esta conta não foi encontrada no sistema.\n");
+            System.out.println("\nEsta conta não foi encontrada no sistema.\n");
             return false;
         }
     }
@@ -109,9 +117,10 @@ public class AccountListing implements Listing {
     public boolean updateAccountPassword(int idAccount, String newPassword) {
         if (accountsList.get(idAccount) != null) {
             accountsList.get(idAccount).setPassword(newPassword);
+            System.out.println("\nSenha atualizada!\n");
             return true;
         } else {
-            System.out.println("Esta conta não foi encontrada no sistema.\n");
+            System.out.println("\nEsta conta não foi encontrada no sistema.\n");
             return false;
         }
     }
@@ -120,8 +129,8 @@ public class AccountListing implements Listing {
     public String toString() {
         StringBuilder accounts = new StringBuilder();
 
-        System.out.println("----------CONTAS----------");
-        System.out.println("\nID | Nome | Email | Senha");
+        System.out.println("\n----------CONTAS----------");
+        System.out.println("\nID | Nome | Email | Senha\n");
 
         for (int i = 0; i < accountsList.size(); i++) {
             accounts.append(accountsList.get(i).getId() + " | ");

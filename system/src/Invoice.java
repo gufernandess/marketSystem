@@ -30,7 +30,7 @@ public class Invoice {
     public String toString() {
         StringBuilder invoice = new StringBuilder();
 
-        System.out.println("----------NOTA FISCAL----------");
+        System.out.println("\n----------NOTA FISCAL----------");
         System.out.println("\nID | Itens | Preço | Data | Cliente\n");
 
         invoice.append(this.id + " | ");
