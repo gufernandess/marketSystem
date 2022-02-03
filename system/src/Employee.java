@@ -8,7 +8,6 @@ public class Employee extends Person {
     private static int counterId = 0;
     private int id;
     private double wage;
-    private Account account;
     private TypeEmployee office;
 
     /**
@@ -25,30 +24,21 @@ public class Employee extends Person {
      */
     
     public Employee(String name, String cpf, String contact, double wage,
-            TypeEmployee office/*, String username, String email, String password*/) {
+            TypeEmployee office) {
         super(name, cpf, contact); // delegando funcionalidades
         Employee.counterId++;
         this.id = counterId;
         this.wage = wage;
         this.office = office;
-        //this.account = new Account(username, email, password); // inicializando conta
     }
 
-    public int getId() {
-        return id;
-    }
+    public int getId() { return id; }
 
-    public TypeEmployee getOffice() {
-        return office;
-    }
+    public TypeEmployee getOffice() { return office; }
 
-    public double getWage() {
-        return wage;
-    }
+    public double getWage() { return wage; }
 
-    public void setWage(double wage) {
-        this.wage = wage;
-    }
+    public void setWage(double wage) { this.wage = wage; }
 
     /**
      * @method setContact que muda o campo contato reutilzando a
@@ -65,8 +55,8 @@ public class Employee extends Person {
 
     @Override
     public String toString() {
-        return String.format("\n\nID: %d, %s, Salário: %.2f, Conta: %s, Cargo: %s\n\n", id, super.toString(), wage,
-         account, office);
+        return String.format("\nID: %d, %s, Salário: %.2f, Cargo: %s\n", id,
+         super.toString(), wage, office);
     }
 
 }

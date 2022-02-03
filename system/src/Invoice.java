@@ -37,7 +37,7 @@ public class Invoice {
         invoice.append(this.itens + " | ");
         invoice.append(this.price + " | ");
         invoice.append(formatDate.format(this.date) + " | ");
-        invoice.append(this.client + "\n");
+        invoice.append(this.client.toString() + "\n");
 
         return invoice.toString();
     }

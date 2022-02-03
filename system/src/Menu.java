@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -96,7 +98,7 @@ public class Menu {
         if(response == 1) {
             System.out.println("\n" + employeeListing + "\n");
 
-            System.out.println("\nO que deseja fazer?\n");
+            System.out.println("O que deseja fazer?\n");
             System.out.println("\n1 - Cadastrar funcionário   2 - Remover funcionário   3 - Atualizar funcionário   4 - Voltar\n");
             response = input.nextInt();
 
@@ -165,10 +167,70 @@ public class Menu {
             
             if(response == 4) dashboard();
 
-        }
-        if(response == 2) {
+            else {
+                System.out.println("\nDigite um comando válido.\n");
+                dashboard();
+            }
 
         }
+
+        if(response == 2) {
+            List<Item> newItensList = new ArrayList<>();
+            String productName;
+            int quantity;
+            String name;
+            String cpf;
+            String contact;
+
+            System.out.println("\nInsira os dados do cliente(nome, CPF e contato).\n");
+            name = input.next();
+            cpf = input.next();
+            contact = input.next();
+
+            Client newClient = new Client(name, cpf, contact);
+            Order newOrder = new Order(newItensList, newClient);
+
+            System.out.println("\n" + stock + "\n");
+
+            while(true) {
+                System.out.println("\nEscolha um produto e sua quantidade para botar no carrinho.\n");
+                productName = input.next();
+                quantity = input.nextInt();
+
+                Item newItem = new Item(Menu.stock.getProductsList().
+                get(Menu.stock.findProductId(productName)), quantity);
+
+                newOrder.addItem(newItem);
+
+                System.out.println("\n" + newOrder.toString() + "\n");
+
+                System.out.println("\nDeseja adicionar mais algum produto?\n");
+                System.out.println("\n1 - Sim   2 - Não\n");
+                response = input.nextInt();
+
+                if(response == 2) break;
+            }
+
+            System.out.println("\nDeseja remover algum produto?\n");
+            System.out.println("\n1 - Sim   2 - Não\n");
+            response = input.nextInt();
+
+            if(response == 1) {
+                int idProduct;
+
+                System.out.println("\nInsira o ID do produto que você deseja remover.\n");
+                idProduct = input.nextInt();
+                
+                newOrder.removeItem(idProduct);
+
+            } if(response == 2) {
+                newOrder.finalizeOrder();
+                Menu.report.addOrder(newOrder);
+
+                dashboard();
+            }
+        }
+
         if(response == 3) {
             System.out.println("\n" + accountListing + "\n");
 
@@ -239,6 +301,8 @@ public class Menu {
                     dashboard();
                 }
             }
+
+            if(response == 4) dashboard();
 
         }
         if(response == 4) {
@@ -329,6 +393,16 @@ public class Menu {
         }
         if(response == 5) {
             System.out.println("\n" + report + "\n");
+
+            System.out.println("\n1 - Voltar\n");
+            response = input.nextInt();
+
+            if(response == 1) dashboard();
+
+            else {
+                System.out.println("\nInsira um comando válido.\n");
+                dashboard();
+            }
         }
         if(response == 6) login();
 

@@ -18,21 +18,13 @@ public abstract class Person {
    * Getters/Setters
    */
 
-  public String getName() {
-    return name;
-  }
+  public String getName() { return name; }
 
-  public String getContact() {
-    return contact;
-  }
+  public String getContact() { return contact; }
 
-  public String getCpf() {
-    return cpf;
-  }
+  public String getCpf() { return cpf; }
 
-  public void setContact(String contact) {
-    this.contact = contact;
-  }
+  public void setContact(String contact) { this.contact = contact; }
 
   @Override
   public String toString() {

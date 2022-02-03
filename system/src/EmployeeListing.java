@@ -4,9 +4,8 @@ public class EmployeeListing implements Listing {
 
     private List<Employee> employeesList;
 
-    public EmployeeListing(/*List<Employee> list*/) {
+    public EmployeeListing() {
         employeesList = new ArrayList<Employee>();
-        //if (list != null) employeesList.addAll(list);
     }
 
     /**
@@ -43,8 +42,8 @@ public class EmployeeListing implements Listing {
 
     @Override
     public boolean deleteObject(int idEmployee) {
-        if (employeesList.get(idEmployee) != null) {
-            employeesList.remove(employeesList.get(idEmployee));
+        if (employeesList.get(idEmployee - 1) != null) {
+            employeesList.remove(employeesList.get(idEmployee - 1));
             System.out.println("\nFuncionário deletado!\n");
             return true;
         } else {
@@ -54,8 +53,8 @@ public class EmployeeListing implements Listing {
     }
 
     public boolean updateEmployeeWage(int idEmployee, double newWage) {
-        if (employeesList.get(idEmployee) != null) {
-            employeesList.get(idEmployee).setWage(newWage);
+        if (employeesList.get(idEmployee - 1) != null) {
+            employeesList.get(idEmployee - 1).setWage(newWage);
             System.out.println("\nSalário atualizado!\n");
             return true;
         } else {
@@ -65,9 +64,9 @@ public class EmployeeListing implements Listing {
     }
 
     public boolean updateEmployeeContact(int idEmployee, String newContact) {
-        if (employeesList.get(idEmployee) != null) {
+        if (employeesList.get(idEmployee - 1) != null) {
             if (employeeAlreadyExists(newContact) == false) {
-                employeesList.get(idEmployee).setContact(newContact);
+                employeesList.get(idEmployee - 1).setContact(newContact);
                 System.out.println("\nContato atualizado!\n");
                 return true;
             } else {
@@ -81,13 +80,13 @@ public class EmployeeListing implements Listing {
     }
 
     public boolean updateEmployeeOffice(int idEmployee) {
-        if(employeesList.get(idEmployee).getOffice() == TypeEmployee.COMMON_EMPLOYEE) {
-            employeesList.get(idEmployee).setOffice(TypeEmployee.MANAGER);
+        if(employeesList.get(idEmployee - 1).getOffice() == TypeEmployee.COMMON_EMPLOYEE) {
+            employeesList.get(idEmployee - 1).setOffice(TypeEmployee.MANAGER);
             System.out.println("\nCargo atualizado!\n");
             return true;
         }
         else {
-            employeesList.get(idEmployee).setOffice(TypeEmployee.COMMON_EMPLOYEE);
+            employeesList.get(idEmployee - 1).setOffice(TypeEmployee.COMMON_EMPLOYEE);
             System.out.println("\nCargo atualizado!\n");
             return true;
         }

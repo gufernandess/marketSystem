@@ -12,65 +12,31 @@ public class Product {
   private String name;
   private double price;
   private int quantity;
-  /*private String description;
-  private Date manufacturingDate;
-  private Date expirationDate;*/
 
-  public Product(String name, double price, int quantity/*, String description, Date manufacturingDate, Date expirationDate*/) {
+  public Product(String name, double price, int quantity) {
     Product.counterId++;
     this.id = counterId;
     this.name = name;
     this.price = price;
     this.quantity = quantity;
-    /*this.description = description;
-    this.expirationDate = expirationDate;
-    this.manufacturingDate = manufacturingDate;*/
   }
 
-  public int getId() {
-      return id;
-  }
+  public int getId() { return id; }
 
-  public String getName() {
-    return name;
-  }
+  public String getName() { return name; }
 
-  public double getPrice() {
-    return price;
-  }
+  public double getPrice() { return price; }
 
-  public int getQuantity() {
-      return quantity;
-  }
+  public int getQuantity() { return quantity; }
 
-  /*public String getDescription() {
-    return description;
-  }
+  public void setName(String name) { this.name = name; }
 
-  public Date getExpirationDate() {
-    return expirationDate;
-  }
+  public void setPrice(double price) { this.price = price; }
 
-  public Date getManufacturingDate() {
-    return manufacturingDate;
-  }*/
-
-  public void setName(String name) {
-      this.name = name;
-  }
-
-  public void setPrice(double price) {
-    this.price = price;
-  }
-
-  public void setQuantity(int quantity) {
-      this.quantity = quantity;
-  }
+  public void setQuantity(int quantity) { this.quantity = quantity; }
 
   @Override
   public String toString() {
-    return String.format("\n\nID: %d, Nome: %s, Preço: %.2f, Descrição: %s, Data de fabricação: %s, Data de validade: %s\n\n",
-     id, name, price/*, description, manufacturingDate.toString(), expirationDate.toString()*/);
+    return String.format("\n\nID: %d, Nome: %s, Preço: %.2f, Quantidade: %d\n\n", id, name, price, quantity);
   }
-
 }

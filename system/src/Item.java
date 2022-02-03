@@ -19,30 +19,19 @@ public class Item {
      * 
      */
 
-    public double getTotalValue() {
-        return product.getPrice() * quantity;
-    }
+    public double getTotalValue() { return product.getPrice() * quantity; }
 
-    public Product getProduct() {
-        return this.product;
-    }
+    public Product getProduct() { return this.product; }
 
-    public int getQuantity() {
-        return this.quantity;
-    }
+    public int getQuantity() { return this.quantity; }
 
-    public void setProduct(Product product) {
-        this.product = product;
-    }
+    public void setProduct(Product product) { this.product = product; }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
+    public void setQuantity(int quantity) { this.quantity = quantity; }
 
     @Override
     public String toString() {
-        return String.format("\n\n%s, Quantidade: %d, Valor total da compra: %.2f\n\n", product.toString(),
-        quantity,
-        getTotalValue());
+        return String.format("\nID: %d, Nome do produto: %s, Preço: %.2f, Quantidade: %d, Valor total da compra: %.2f\n",
+         product.getId(), product.getName(), product.getPrice(), quantity, getTotalValue());
     }
 }

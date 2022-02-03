@@ -19,17 +19,11 @@ public class Account {
     this.password = password;
   }
 
-  public int getId() {
-    return id;
-  }
+  public int getId() { return id; }
 
-  public String getUsername() {
-    return username;
-  }
+  public String getUsername() { return username; }
 
-  public String getEmail() {
-    return email;
-  }
+  public String getEmail() { return email; }
 
   /**
    * A senha é acessada com criptografia hash por segurança.
@@ -37,21 +31,13 @@ public class Account {
    * @return int
    */
 
-  public int getPassword() {
-    return password.hashCode();
-  }
+  public int getPassword() { return password.hashCode(); }
 
-  public void setUsername(String username) {
-    this.username = username;
-  }
+  public void setUsername(String username) { this.username = username; }
 
-  public void setEmail(String email) {
-    this.email = email;
-  }
+  public void setEmail(String email) { this.email = email; }
 
-  public void setPassword(String password) {
-    this.password = password;
-  }
+  public void setPassword(String password) { this.password = password; }
 
   @Override
   public String toString() {

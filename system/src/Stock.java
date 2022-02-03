@@ -13,9 +13,8 @@ public class Stock {
 
   private List<Product> productsList;
 
-  public Stock(/*List<Product> list*/) {
+  public Stock() {
     productsList = new ArrayList<Product>();
-    //if (list != null) productsList.addAll(list);
   }
 
   private boolean productAlreadyExists(String name) {
@@ -27,6 +26,17 @@ public class Stock {
     }
 
     return productAlreadyExists;
+  }
+
+  public int findProductId(String productName) {
+    int findProductId = -1;
+    for (int i = 0; i < productsList.size(); i++) {
+        if (productName.equals(productsList.get(i).getName())) {
+          findProductId = i;
+        }
+    }
+  
+    return findProductId;
   }
 
   public List<Product> getProductsList() {
@@ -45,8 +55,8 @@ public class Stock {
   }
 
   public boolean deleteProduct(int idProduct) {
-    if (productsList.get(idProduct) != null) {
-      productsList.remove(productsList.get(idProduct));
+    if (productsList.get(idProduct - 1) != null) {
+      productsList.remove(productsList.get(idProduct - 1));
       System.out.println("\nO produto foi removido com sucesso.\n");
       return true;
     } else {
@@ -56,9 +66,9 @@ public class Stock {
   }
 
   public boolean updateProductName(int idProduct, String newName) {
-    if (productsList.get(idProduct) != null) {
+    if (productsList.get(idProduct - 1) != null) {
       if (productAlreadyExists(newName) == false) {
-          productsList.get(idProduct).setName(newName);
+          productsList.get(idProduct - 1).setName(newName);
           System.out.println("\nO nome do produto foi atualizado com sucesso.\n");
           return true;
       } else {
@@ -72,8 +82,8 @@ public class Stock {
 } 
 
   public boolean updateProductPrice(int idProduct, double newPrice) {
-    if(productsList.get(idProduct) != null) {
-      productsList.get(idProduct).setPrice(newPrice);
+    if(productsList.get(idProduct - 1) != null) {
+      productsList.get(idProduct - 1).setPrice(newPrice);
       System.out.println("\nO preço do produto foi atualizado com sucesso.\n");
       return true;
   } else {
@@ -87,8 +97,8 @@ public class Stock {
       System.out.println("\nInsira uma quantidade válida.\n");
       return false;
     }
-    if(productsList.get(idProduct) != null) {
-      productsList.get(idProduct).setQuantity(productsList.get(idProduct)
+    if(productsList.get(idProduct - 1) != null) {
+      productsList.get(idProduct - 1).setQuantity(productsList.get(idProduct - 1)
       .getQuantity() + newQuantity);
       System.out.println("\nA quantidade do produto disponível foi atualizada.\n");
       return true;
@@ -114,6 +124,8 @@ public class Stock {
         searchResult.add(productsList.get(i));
       }
     }
+
+    System.out.println("\n" + searchResult + "\n");
 
     return searchResult;
   }

@@ -5,9 +5,8 @@ public class AccountListing implements Listing {
 
     private List<Account> accountsList;
 
-    public AccountListing(/*List<Account> list*/) {
+    public AccountListing() {
         accountsList = new ArrayList<Account>();
-        //if (list != null) accountsList.addAll(list);
     }
 
     /**
@@ -77,8 +76,8 @@ public class AccountListing implements Listing {
 
     @Override
     public boolean deleteObject(int idAccount) {
-        if (accountsList.get(idAccount) != null) {
-            accountsList.remove(accountsList.get(idAccount));
+        if (accountsList.get(idAccount - 1) != null) {
+            accountsList.remove(accountsList.get(idAccount - 1));
             System.out.println("\nConta deletada com sucesso!\n");
             return true;
         } else {
@@ -88,8 +87,8 @@ public class AccountListing implements Listing {
     }
 
     public boolean updateAccountName(int idAccount, String newName) {
-        if (accountsList.get(idAccount) != null) {
-            accountsList.get(idAccount).setUsername(newName);
+        if (accountsList.get(idAccount - 1) != null) {
+            accountsList.get(idAccount - 1).setUsername(newName);
             System.out.println("\nNome de usuário atualizado!\n");
             return true;
         } else {
@@ -99,9 +98,9 @@ public class AccountListing implements Listing {
     }
 
     public boolean updateAccountEmail(int idAccount, String newEmail) {
-        if (accountsList.get(idAccount) != null) {
+        if (accountsList.get(idAccount - 1) != null) {
             if (verifyEmail(newEmail) == false) {
-                accountsList.get(idAccount).setUsername(newEmail);
+                accountsList.get(idAccount - 1).setUsername(newEmail);
                 System.out.println("\nE-mail atualizado!\n");
                 return true;
             } else {
@@ -115,8 +114,8 @@ public class AccountListing implements Listing {
     }
 
     public boolean updateAccountPassword(int idAccount, String newPassword) {
-        if (accountsList.get(idAccount) != null) {
-            accountsList.get(idAccount).setPassword(newPassword);
+        if (accountsList.get(idAccount - 1) != null) {
+            accountsList.get(idAccount - 1).setPassword(newPassword);
             System.out.println("\nSenha atualizada!\n");
             return true;
         } else {

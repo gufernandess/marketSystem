@@ -1,3 +1,4 @@
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -5,9 +6,10 @@ public class Report {
 
     private List<Order> ordersList;
 
-    public Report(/*List<Order> list*/) {
+    SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
+
+    public Report() {
         ordersList = new ArrayList<Order>();
-        // if (list != null) ordersList.addAll(list);
     }
 
     private double computeTotalValue() {
@@ -18,20 +20,20 @@ public class Report {
         return total;
     }
 
+    public void addOrder(Order order) { ordersList.add(order); }
+
     // private List<Order> filterOrder() {}
 
     public String toString() {
         StringBuilder orders = new StringBuilder();
 
         System.out.println("\n----------RELATÓRIO----------");
-        System.out.println("\nID | Itens | Preço | Data | Cliente\n");
+        System.out.println("\nID | Dados da compra | Data \n");
 
         for (int i = 0; i < ordersList.size(); i++) {
             orders.append(ordersList.get(i).getId() + " | ");
-            orders.append(ordersList.get(i).getItens() + " | ");
-            orders.append(ordersList.get(i).getPrice() + " | ");
-            orders.append(ordersList.get(i).getDate() + " | ");
-            orders.append(ordersList.get(i).getClient() + "\n\n");
+            orders.append(ordersList.get(i).toString() + " | ");
+            orders.append(formatDate.format(ordersList.get(i).getDate()) + " | ");
         }
 
         orders.append("Ganho total: " + computeTotalValue());

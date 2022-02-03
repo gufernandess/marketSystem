@@ -15,7 +15,6 @@ public class Order {
   private double price;
   private Date date;
   private Client client;
-  private Employee employee;
 
   /**
    * O objeto SimpleDateFormat serve para formatação de datas, nesse caso
@@ -27,14 +26,13 @@ public class Order {
 
   SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
 
-  public Order(List<Item> itens, Employee employee, Client client) {
+  public Order(List<Item> itens, Client client) {
     Order.counterId++;
     this.id = counterId;
     this.itens = new ArrayList<Item>();
-    // if (itens != null) this.itens.addAll(itens);
+    if (itens != null) this.itens.addAll(itens);
     this.price = computeBill();
     this.date = new Date(System.currentTimeMillis());
-    this.employee = employee;
     this.client = client;
   }
 
@@ -93,25 +91,15 @@ private int findItemId(Item item) {
   return findItemId;
 }
 
-  public int getId() {
-      return id;
-  }
+  public int getId() { return id; }
 
-  public List<Item> getItens() {
-      return itens;
-  }
+  public List<Item> getItens() { return itens; }
 
-  public double getPrice() {
-      return price;
-  }
+  public double getPrice() { return price; }
 
-  public Client getClient() {
-      return client;
-  }
+  public Client getClient() { return client; }
 
-  public Date getDate() {
-      return date;
-  }
+  public Date getDate() { return date; }
 
   /**
    * Computando valor total do pedido
@@ -200,16 +188,15 @@ private int findItemId(Item item) {
     return (this.itens.get(idItem) != null) ? this.itens.remove(this.itens.get(idItem)) : false;
   }
 
-  public Invoice finalizeOrder() { // Aqui possivelmente vai ter a lógica de adicionar o pedido em relatório.
+  public void finalizeOrder() {
     System.out.println("\nCompra finalizada.\n");
-
-    return new Invoice(this.id, this.itens, this.price, this.date, this.client); /* Instância da nota fiscal */
+    // return new Invoice(this.id, this.itens, this.price, this.date, this.client); /* Instância da nota fiscal */
   }
 
   @Override
   public String toString() {
-    return String.format("\n\nId: %d, Preço: %.2f, Data: %s, Client: %s, Empregado: %s\n\n", id, price, 
-    formatDate.format(date), client, employee);
+    return String.format("\n\nId: %d, Preço: %.2f, Data: %s \nDados do cliente: %s\n\n", id, computeBill(),
+    formatDate.format(date), client.toString());
   }
 
 }
