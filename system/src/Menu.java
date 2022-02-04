@@ -25,8 +25,10 @@ public class Menu {
    */
 
   static void loadingData() {
-    accountListing.readListAccounts(); // lendo contas do arquivo
+    // lendo dados dos arquivos
+    accountListing.readListAccounts();
     employeeListing.readListEmployess();
+    stock.readListProducts();
   }
 
   public static void login() {
@@ -134,7 +136,7 @@ public class Menu {
         office = TypeEmployee.COMMON_EMPLOYEE;
 
         employeeListing.addObject(new Employee(name, cpf, contact, wage, office));
-
+        employeeListing.writeListEmployess();
         dashboard();
       }
       if (response == 2) {
@@ -142,7 +144,7 @@ public class Menu {
         response = input.nextInt();
 
         employeeListing.deleteObject(response);
-
+        employeeListing.writeListEmployess();
         dashboard();
       }
       if (response == 3) {
@@ -159,7 +161,6 @@ public class Menu {
           newContact = input.next();
 
           employeeListing.updateEmployeeContact(idEmployee, newContact);
-
           dashboard();
         }
         if (response == 2) {
@@ -168,7 +169,6 @@ public class Menu {
           newWage = input.next();
 
           employeeListing.updateEmployeeContact(idEmployee, newWage);
-
           dashboard();
         }
         if (response == 3) {
@@ -178,10 +178,11 @@ public class Menu {
           System.out.println("\nDigite um comando válido.\n");
           dashboard();
         }
+
+        employeeListing.writeListEmployess();
       }
 
       if (response == 4) {
-        employeeListing.writeListEmployess();
         dashboard();
       }
 
@@ -401,8 +402,10 @@ public class Menu {
 
       }
 
-      if (response == 5)
+      if (response == 5) {
+        stock.writeListProducts();
         dashboard();
+      }
 
       else {
         System.out.println("\nDigite um comando válido.\n");

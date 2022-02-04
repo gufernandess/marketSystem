@@ -1,8 +1,17 @@
+import java.io.EOFException;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.StreamCorruptedException;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Dentro da classe Stock(Estoque) são armazenados todos os produtos disponíveis.
+ * Dentro da classe Stock(Estoque) são armazenados todos os produtos
+ * disponíveis.
  * Todos os produtos retirados para venda são retirados daqui.
  * 
  * @param productsList
@@ -17,10 +26,9 @@ public class Stock {
     productsList = new ArrayList<Product>();
   }
 
-
   public List<Product> getProductsList() {
     return productsList;
-}
+  }
 
   private boolean productAlreadyExists(String name) {
     boolean productAlreadyExists = false;
@@ -36,11 +44,11 @@ public class Stock {
   public int findProductId(String productName) {
     int findProductId = -1;
     for (int i = 0; i < productsList.size(); i++) {
-        if (productName.equals(productsList.get(i).getName())) {
-          findProductId = i;
-        }
+      if (productName.equals(productsList.get(i).getName())) {
+        findProductId = i;
+      }
     }
-  
+
     return findProductId;
   }
 
@@ -69,49 +77,49 @@ public class Stock {
   public boolean updateProductName(int idProduct, String newName) {
     if (productsList.get(idProduct - 1) != null) {
       if (productAlreadyExists(newName) == false) {
-          productsList.get(idProduct - 1).setName(newName);
-          System.out.println("\nO nome do produto foi atualizado com sucesso.\n");
-          return true;
+        productsList.get(idProduct - 1).setName(newName);
+        System.out.println("\nO nome do produto foi atualizado com sucesso.\n");
+        return true;
       } else {
-          System.out.println("\nEste produto já está cadastrado no nosso sistema.\n");
-          return false;
+        System.out.println("\nEste produto já está cadastrado no nosso sistema.\n");
+        return false;
       }
-  } else {
+    } else {
       System.out.println("\nEste produto não foi encontrada no sistema.\n");
       return false;
+    }
   }
-} 
 
   public boolean updateProductPrice(int idProduct, double newPrice) {
-    if(productsList.get(idProduct - 1) != null) {
+    if (productsList.get(idProduct - 1) != null) {
       productsList.get(idProduct - 1).setPrice(newPrice);
       System.out.println("\nO preço do produto foi atualizado com sucesso.\n");
       return true;
-  } else {
+    } else {
       System.out.println("\nEste produto não foi encontrado no sistema.\n");
       return false;
+    }
   }
-} 
 
   public boolean updateProductQuantity(int idProduct, int newQuantity) {
-    if(newQuantity <= 0) {
+    if (newQuantity <= 0) {
       System.out.println("\nInsira uma quantidade válida.\n");
       return false;
     }
-    if(productsList.get(idProduct - 1) != null) {
+    if (productsList.get(idProduct - 1) != null) {
       productsList.get(idProduct - 1).setQuantity(productsList.get(idProduct - 1)
-      .getQuantity() + newQuantity);
+          .getQuantity() + newQuantity);
       System.out.println("\nA quantidade do produto disponível foi atualizada.\n");
       return true;
-  } 
-    else {
+    } else {
       System.out.println("\nEste produto não foi encontrado no sistema.\n");
       return false;
+    }
   }
-} 
 
   /**
-   * Método de pesquisa de produtos que gera uma nova lista baseada no pattern passado como parâmetro.
+   * Método de pesquisa de produtos que gera uma nova lista baseada no pattern
+   * passado como parâmetro.
    * 
    * @param pattern
    * @return
@@ -143,5 +151,45 @@ public class Stock {
     }
 
     return products.toString();
+  }
+
+  public void readListProducts() {
+    Product product;
+    boolean endOfFile = false;
+
+    try (
+        FileInputStream productFile = new FileInputStream("Products.txt");
+        ObjectInputStream productStream = new ObjectInputStream(productFile);) {
+
+      while (endOfFile == false) {
+        try {
+          product = (Product) productStream.readObject();
+          productsList.add(product);
+        } catch (EOFException e) {
+          endOfFile = true;
+        }
+      }
+    } catch (FileNotFoundException e) {
+      System.out.println("\nNenhum arquivo anterior foi lido");
+    } catch (ClassNotFoundException e) {
+      System.out.println("\nTentando ler um objeto de uma classe desconhecida");
+    } catch (StreamCorruptedException e) {
+      System.out.println("\nFormato de arquivo ilegível");
+    } catch (IOException e) {
+      System.out.println("\nerro: Ocorreu um problema ao ler o arquivo");
+    }
+  }
+
+  public void writeListProducts() {
+    try (
+        FileOutputStream productFile = new FileOutputStream("Products.txt");
+        ObjectOutputStream productStream = new ObjectOutputStream(productFile);) {
+      for (Product product : productsList) {
+        productStream.writeObject(product);
+      }
+    } catch (IOException e) {
+      System.out.println("Ocorreu um problema ao gravar o arquivo");
+      System.out.println(e.getMessage());
+    }
   }
 }

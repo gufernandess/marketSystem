@@ -1,3 +1,5 @@
+import java.io.Serializable;
+
 // import java.util.Date;
 
 /**
@@ -5,8 +7,8 @@
  * e vendidos aos clientes.
  */
 
-public class Product implements Comparable<Product> {
-  
+public class Product implements Comparable<Product>, Serializable {
+
   private static int counterId = 0;
   private int id;
   private String name;
@@ -21,23 +23,37 @@ public class Product implements Comparable<Product> {
     this.quantity = quantity;
   }
 
-  public int getId() { return id; }
+  public int getId() {
+    return id;
+  }
 
-  public String getName() { return name; }
+  public String getName() {
+    return name;
+  }
 
-  public double getPrice() { return price; }
+  public double getPrice() {
+    return price;
+  }
 
-  public int getQuantity() { return quantity; }
+  public int getQuantity() {
+    return quantity;
+  }
 
-  public void setName(String name) { this.name = name; }
+  public void setName(String name) {
+    this.name = name;
+  }
 
-  public void setPrice(double price) { this.price = price; }
+  public void setPrice(double price) {
+    this.price = price;
+  }
 
-  public void setQuantity(int quantity) { this.quantity = quantity; }
+  public void setQuantity(int quantity) {
+    this.quantity = quantity;
+  }
 
   @Override
   public int compareTo(Product product) {
-      return this.name.compareTo(product.name);
+    return this.name.compareTo(product.name);
   }
 
   @Override
