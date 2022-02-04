@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -40,6 +39,7 @@ public class Menu {
         password = input.next();
 
         if(accountListing.thisAccountExists(email, password)) dashboard();
+
         else {
             System.out.println("\nDesculpe, mas não encontramos sua conta. Verifique seus dados e tente novamente.\n");
             login();
@@ -75,8 +75,7 @@ public class Menu {
         email = input.next();
         password = input.next();
 
-        Account newAccount = new Account(name, email, password);
-        accountListing.addObject(newAccount);
+        accountListing.addObject(new Account(name, email, password));
 
         login();
 
@@ -116,8 +115,7 @@ public class Menu {
                 wage = input.nextDouble();
                 office = TypeEmployee.COMMON_EMPLOYEE;
 
-                Employee newEmployee = new Employee(name, cpf, contact, wage, office);
-                employeeListing.addObject(newEmployee);
+                employeeListing.addObject(new Employee(name, cpf, contact, wage, office));
 
                 dashboard();
             }
@@ -175,7 +173,6 @@ public class Menu {
         }
 
         if(response == 2) {
-            List<Item> newItensList = new ArrayList<>();
             String productName;
             int quantity;
             String name;
@@ -187,8 +184,7 @@ public class Menu {
             cpf = input.next();
             contact = input.next();
 
-            Client newClient = new Client(name, cpf, contact);
-            Order newOrder = new Order(newItensList, newClient);
+            Order newOrder = new Order(new ArrayList<Item>(), new Client(name, cpf, contact));
 
             System.out.println("\n" + stock + "\n");
 
@@ -224,7 +220,7 @@ public class Menu {
                 newOrder.removeItem(idProduct);
 
             } if(response == 2) {
-                newOrder.finalizeOrder();
+                System.out.println("\nCompra finalizada.\n");
                 Menu.report.addOrder(newOrder);
 
                 dashboard();
@@ -247,9 +243,8 @@ public class Menu {
                 username = input.next();
                 email = input.next();
                 password = input.next();
-
-                Account newAccount = new Account(username, email, password);
-                accountListing.addObject(newAccount);
+                
+                accountListing.addObject(new Account(username, email, password));
 
                 dashboard();
             }
@@ -322,8 +317,7 @@ public class Menu {
                 price = input.nextDouble();
                 quantity = input.nextInt();
 
-                Product newProduct = new Product(name, price, quantity);
-                stock.addProduct(newProduct);
+                stock.addProduct(new Product(name, price, quantity));
 
                 dashboard();
             }

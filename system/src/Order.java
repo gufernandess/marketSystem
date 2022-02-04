@@ -7,7 +7,7 @@ import java.util.Date;
  * Representação de uma compra feita por um cliente.
  */
 
-public class Order {
+public class Order implements Comparable<Order> {
 
   private static int counterId = 0;
   private int id;
@@ -44,7 +44,7 @@ public class Order {
    * Necessário a comparação constante entre ambas as listas.
    * 
    * @param productName
-   * @return
+   * @return boolean
    */
 
   private boolean isTheProductInStock(String productName) {
@@ -116,6 +116,17 @@ private int findItemId(Item item) {
     return total;
   }
 
+  /**
+   * O método addItem possui diversos casos de uso, já que o mesmo
+   * têm de pegar produtos do estoque, então toda a lógica de tirar
+   * determinada quantidade de um produto do estoque e adicionar
+   *  á lista está incluso, assim como remover um item e 
+   *  colocá-lo de volta no estoque.
+   * 
+   * @param item
+   * @return
+   */
+
   public boolean addItem(Item item) {
     /**
      * Verifcando possíveis erros de input
@@ -183,14 +194,38 @@ private int findItemId(Item item) {
     }
   }
 
+  /**
+   * Caso um item seja removido, a quantidade tirada do estoque terá
+   * de ser reposta.
+   * 
+   * @param idItem
+   * @return
+   */
+
   public boolean removeItem(int idItem) {
-    System.out.println("\nItem removido com sucesso.\n");
-    return (this.itens.get(idItem) != null) ? this.itens.remove(this.itens.get(idItem)) : false;
+    if(this.itens.get(idItem) != null) {
+      Menu.stock.getProductsList().get(findProductId(this.itens.get(idItem).getProduct().
+      getName())).setQuantity(this.itens.get(idItem).getQuantity() + Menu.stock.
+      getProductsList().get(findProductId(this.itens.get(idItem).getProduct().
+      getName())).getQuantity());
+      this.itens.remove(idItem);
+      System.out.println("\nProduto removido com sucesso!\n");
+      return true;
+    } else {
+      System.out.println("\nO produto não foi encontrado.\n");
+      return false;
+    }
   }
 
-  public void finalizeOrder() {
+  /*public Invoice finalizeOrder() {
     System.out.println("\nCompra finalizada.\n");
-    // return new Invoice(this.id, this.itens, this.price, this.date, this.client); /* Instância da nota fiscal */
+    return new Invoice(this.id, this.itens, this.price, this.date, this.client);  Instância da nota fiscal
+  }*/
+
+
+  @Override
+  public int compareTo(Order order) {
+    return Integer.compare(this.id, order.id);
   }
 
   @Override

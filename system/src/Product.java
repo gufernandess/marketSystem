@@ -5,7 +5,7 @@
  * e vendidos aos clientes.
  */
 
-public class Product {
+public class Product implements Comparable<Product> {
   
   private static int counterId = 0;
   private int id;
@@ -34,6 +34,11 @@ public class Product {
   public void setPrice(double price) { this.price = price; }
 
   public void setQuantity(int quantity) { this.quantity = quantity; }
+
+  @Override
+  public int compareTo(Product product) {
+      return this.name.compareTo(product.name);
+  }
 
   @Override
   public String toString() {

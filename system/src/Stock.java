@@ -17,6 +17,11 @@ public class Stock {
     productsList = new ArrayList<Product>();
   }
 
+
+  public List<Product> getProductsList() {
+    return productsList;
+}
+
   private boolean productAlreadyExists(String name) {
     boolean productAlreadyExists = false;
     for (int i = 0; i < productsList.size(); i++) {
@@ -37,10 +42,6 @@ public class Stock {
     }
   
     return findProductId;
-  }
-
-  public List<Product> getProductsList() {
-      return productsList;
   }
 
   public boolean addProduct(Product product) {
@@ -116,7 +117,7 @@ public class Stock {
    * @return
    */
 
-  public List<Product> search(String pattern) {
+  List<Product> search(String pattern) {
     List<Product> searchResult = new ArrayList<Product>();
 
     for (int i = 0; i < productsList.size(); i++) {
@@ -134,13 +135,11 @@ public class Stock {
     StringBuilder products = new StringBuilder();
 
     System.out.println("\n----------PRODUTOS----------");
-    System.out.println("\nID | Nome | Preço | Quantidade | Descrição | D. Fabricação | D. Validade\n");
+    System.out.println("\nID | Nome | Preço | Quantidade\n");
 
     for (int i = 0; i < productsList.size(); i++) {
       products.append(productsList.get(i).getId() + " | " + productsList.get(i).getName() + " | " +
-          productsList.get(i).getPrice() + " | " + productsList.get(i).getQuantity() + " | "/* +
-          productsList.get(i).getDescription() + " | " + productsList.get(i).getManufacturingDate() + " | " +
-          productsList.get(i).getExpirationDate() + "\n"*/);
+          productsList.get(i).getPrice() + " | " + productsList.get(i).getQuantity() + " | \n");
     }
 
     return products.toString();

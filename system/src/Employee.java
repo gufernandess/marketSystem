@@ -34,9 +34,9 @@ public class Employee extends Person {
 
     public int getId() { return id; }
 
-    public TypeEmployee getOffice() { return office; }
-
     public double getWage() { return wage; }
+
+    public TypeEmployee getOffice() { return office; }
 
     public void setWage(double wage) { this.wage = wage; }
 

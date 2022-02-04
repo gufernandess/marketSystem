@@ -8,7 +8,7 @@ import java.util.List;
  * Para cada pedido há uma nota fiscal correspondente.
  */
 
-public class Invoice {
+public class Invoice implements Comparable<Invoice> {
 
     private int id;
     private List<Item> itens;
@@ -27,6 +27,14 @@ public class Invoice {
         this.client = client;
     }
 
+    public int getId() { return id; }
+
+    @Override
+    public int compareTo(Invoice invoice) {
+        return Integer.compare(this.id, invoice.getId());
+    }
+
+    @Override
     public String toString() {
         StringBuilder invoice = new StringBuilder();
 

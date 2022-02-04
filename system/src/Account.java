@@ -3,7 +3,7 @@
  * em um mercantil
  */
 
-public class Account {
+public class Account implements Comparable<Account> {
 
   private static int counterId = 0;
   private int id;
@@ -38,6 +38,11 @@ public class Account {
   public void setEmail(String email) { this.email = email; }
 
   public void setPassword(String password) { this.password = password; }
+
+  @Override
+  public int compareTo(Account account) {
+    return Integer.compare(this.id, account.id);
+  }
 
   @Override
   public String toString() {
