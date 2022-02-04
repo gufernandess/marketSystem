@@ -1,3 +1,11 @@
+import java.io.EOFException;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.StreamCorruptedException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,8 +52,8 @@ public class AccountListing implements Listing {
     public boolean thisAccountExists(String email, String password) {
         boolean thisAccountExists = false;
         for (int i = 0; i < accountsList.size(); i++) {
-            if (email.equals(accountsList.get(i).getEmail()) && 
-            password.hashCode() == accountsList.get(i).getPassword()) {
+            if (email.equals(accountsList.get(i).getEmail()) &&
+                    password.hashCode() == accountsList.get(i).getPassword()) {
                 thisAccountExists = true;
             }
         }
@@ -121,6 +129,53 @@ public class AccountListing implements Listing {
         } else {
             System.out.println("\nEsta conta não foi encontrada no sistema.\n");
             return false;
+        }
+    }
+
+    public List<Account> getAccountListing() {
+        return this.accountsList;
+    }
+
+    /**
+     * Salvando e lendo dados no arquivo
+     */
+
+    public void readListAccounts() {
+        Account account;
+        boolean endOfFile = false;
+
+        try (
+                FileInputStream accountFile = new FileInputStream("Accounts.txt");
+                ObjectInputStream accountStream = new ObjectInputStream(accountFile);) {
+
+            while (endOfFile == false) {
+                try {
+                    account = (Account) accountStream.readObject();
+                    accountsList.add(account);
+                } catch (EOFException e) {
+                    endOfFile = true;
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("\nNenhum arquivo anterior foi lido");
+        } catch (ClassNotFoundException e) {
+            System.out.println("\nTentando ler um objeto de uma classe desconhecida");
+        } catch (StreamCorruptedException e) {
+            System.out.println("\nFormato de arquivo ilegível");
+        } catch (IOException e) {
+            System.out.println("\nerro: Ocorreu um problema ao ler o arquivo");
+        }
+    }
+
+    public void writeListAccounts() {
+        try (
+                FileOutputStream accountFile = new FileOutputStream("Accounts.txt");
+                ObjectOutputStream accountStream = new ObjectOutputStream(accountFile);) {
+            for (Account account : accountsList) {
+                accountStream.writeObject(account);
+            }
+        } catch (IOException e) {
+            System.out.println("Ocorreu um problema ao gravar o arquivo");
         }
     }
 

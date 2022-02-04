@@ -1,9 +1,11 @@
+import java.io.Serializable;
+
 /**
  * Classe Employee encapsula os dados básicos que um
  * empregado deve ter em um mercantil. O mesmo herda
  * da classe abstrata Person
  */
-public class Employee extends Person {
+public class Employee extends Person implements Serializable {
 
     private static int counterId = 0;
     private int id;
@@ -22,7 +24,7 @@ public class Employee extends Person {
      * 
      * @return void
      */
-    
+
     public Employee(String name, String cpf, String contact, double wage,
             TypeEmployee office) {
         super(name, cpf, contact); // delegando funcionalidades
@@ -32,13 +34,25 @@ public class Employee extends Person {
         this.office = office;
     }
 
-    public int getId() { return id; }
+    /**
+     * GETERS E SETERS
+     */
 
-    public double getWage() { return wage; }
+    public int getId() {
+        return id;
+    }
 
-    public TypeEmployee getOffice() { return office; }
+    public double getWage() {
+        return wage;
+    }
 
-    public void setWage(double wage) { this.wage = wage; }
+    public TypeEmployee getOffice() {
+        return office;
+    }
+
+    public void setWage(double wage) {
+        this.wage = wage;
+    }
 
     /**
      * @method setContact que muda o campo contato reutilzando a
@@ -56,7 +70,7 @@ public class Employee extends Person {
     @Override
     public String toString() {
         return String.format("\nID: %d, %s, Salário: %.2f, Cargo: %s\n", id,
-         super.toString(), wage, office);
+                super.toString(), wage, office);
     }
 
 }

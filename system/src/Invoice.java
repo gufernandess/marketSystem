@@ -4,7 +4,8 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * A classe invoice (Nota fiscal) é instanciada dentro de order (Pedido).
+ * Classe Invoice encapsula os dados básicos de uma nota
+ * fiscal. A mesma é instanciada dentro de order (Pedido).
  * Para cada pedido há uma nota fiscal correspondente.
  */
 
@@ -18,6 +19,18 @@ public class Invoice implements Comparable<Invoice> {
 
     SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
 
+    /**
+     * Construtor da classe Invoice, recebe os dados básicos para
+     * instanciar os campos da classe Invoice
+     * 
+     * @param id
+     * @param itens
+     * @param price
+     * @param date
+     * @param client
+     * 
+     * @return void
+     */
     public Invoice(int id, List<Item> itens, double price, Date date, Client client) {
         this.id = id;
         itens = new ArrayList<Item>();
@@ -27,7 +40,13 @@ public class Invoice implements Comparable<Invoice> {
         this.client = client;
     }
 
-    public int getId() { return id; }
+    /**
+     * GETERS E SETERS
+     */
+
+    public int getId() {
+        return id;
+    }
 
     @Override
     public int compareTo(Invoice invoice) {
@@ -41,11 +60,10 @@ public class Invoice implements Comparable<Invoice> {
         System.out.println("\n----------NOTA FISCAL----------");
         System.out.println("\nID | Itens | Preço | Data | Cliente\n");
 
-        invoice.append(this.id + " | ");
-        invoice.append(this.itens + " | ");
-        invoice.append(this.price + " | ");
-        invoice.append(formatDate.format(this.date) + " | ");
-        invoice.append(this.client.toString() + "\n");
+        invoice.append(
+                this.id + " | " + this.itens + " | " + this.price
+                        + " | " + formatDate.format(this.date) + " | "
+                        + this.client.toString() + "\n");
 
         return invoice.toString();
     }

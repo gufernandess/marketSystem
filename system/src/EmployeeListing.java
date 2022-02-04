@@ -1,5 +1,14 @@
+import java.io.EOFException;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.StreamCorruptedException;
 import java.util.ArrayList;
 import java.util.List;
+
 public class EmployeeListing implements Listing {
 
     private List<Employee> employeesList;
@@ -80,15 +89,58 @@ public class EmployeeListing implements Listing {
     }
 
     public boolean updateEmployeeOffice(int idEmployee) {
-        if(employeesList.get(idEmployee - 1).getOffice() == TypeEmployee.COMMON_EMPLOYEE) {
+        if (employeesList.get(idEmployee - 1).getOffice() == TypeEmployee.COMMON_EMPLOYEE) {
             employeesList.get(idEmployee - 1).setOffice(TypeEmployee.MANAGER);
             System.out.println("\nCargo atualizado!\n");
             return true;
-        }
-        else {
+        } else {
             employeesList.get(idEmployee - 1).setOffice(TypeEmployee.COMMON_EMPLOYEE);
             System.out.println("\nCargo atualizado!\n");
             return true;
+        }
+    }
+
+    /**
+     * Salvando e lendo dados no arquivo
+     */
+
+    public void readListEmployess() {
+        Employee employee;
+        boolean endOfFile = false;
+
+        try (
+                FileInputStream employeeFile = new FileInputStream("Employess.txt");
+                ObjectInputStream employeeStream = new ObjectInputStream(employeeFile);) {
+
+            while (endOfFile == false) {
+                try {
+                    employee = (Employee) employeeStream.readObject();
+                    employeesList.add(employee);
+                } catch (EOFException e) {
+                    endOfFile = true;
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("\nNenhum arquivo anterior foi lido");
+        } catch (ClassNotFoundException e) {
+            System.out.println("\nTentando ler um objeto de uma classe desconhecida");
+        } catch (StreamCorruptedException e) {
+            System.out.println("\nFormato de arquivo ilegível");
+        } catch (IOException e) {
+            System.out.println("\nerro: Ocorreu um problema ao ler o arquivo");
+        }
+    }
+
+    public void writeListEmployess() {
+        try (
+                FileOutputStream employeeFile = new FileOutputStream("Employess.txt");
+                ObjectOutputStream employeeStream = new ObjectOutputStream(employeeFile);) {
+            for (Employee employee : employeesList) {
+                employeeStream.writeObject(employee);
+            }
+        } catch (IOException e) {
+            System.out.println("Ocorreu um problema ao gravar o arquivo");
+            System.out.println(e.getMessage());
         }
     }
 
@@ -99,13 +151,11 @@ public class EmployeeListing implements Listing {
         System.out.println("\n----------FUNCIONÁRIOS----------");
         System.out.println("\nID | Nome | CPF | Contato | Salário | Cargo\n");
 
-        for (int i = 0; i < employeesList.size(); i++) {
-            employees.append(employeesList.get(i).getId() + " | ");
-            employees.append(employeesList.get(i).getName() + " | ");
-            employees.append(employeesList.get(i).getCpf() + " | ");
-            employees.append(employeesList.get(i).getContact() + " | ");
-            employees.append(employeesList.get(i).getWage() + " | ");
-            employees.append(employeesList.get(i).getOffice() + "\n");
+        for (Employee employee : employeesList) {
+            employees.append(employee.getId() + " | " + employee.getName()
+                    + " | " + employee.getCpf() + " | " + employee.getContact()
+                    + " | " + employee.getWage() + " | " + employee.getOffice() + "\n");
+
         }
 
         return employees.toString();
